@@ -10,7 +10,6 @@ import '/src/data/models/trainer/fact_card.dart';
 import '/src/data/models/trainer/trainer_attempt.dart';
 import '/src/data/models/trainer/trainer_problem.dart';
 import '/src/data/repository/fact_repository.dart';
-import '/src/data/srs/srs_scheduler.dart';
 import '/src/data/timing/timing_service.dart';
 
 class DiagnosticProvider extends ChangeNotifier {
@@ -18,7 +17,6 @@ class DiagnosticProvider extends ChangeNotifier {
     _factRepository = GetIt.I.get<FactRepository>();
     _factCardDao = GetIt.I.get<FactCardDao>();
     _attemptDao = GetIt.I.get<AttemptDao>();
-    _srsScheduler = GetIt.I.get<SrsScheduler>();
     _timingService = GetIt.I.get<TimingService>();
     _preferences = GetIt.I.get<SharedPreferences>();
   }
@@ -26,7 +24,6 @@ class DiagnosticProvider extends ChangeNotifier {
   late final FactRepository _factRepository;
   late final FactCardDao _factCardDao;
   late final AttemptDao _attemptDao;
-  late final SrsScheduler _srsScheduler;
   late final TimingService _timingService;
   late final SharedPreferences _preferences;
   Timer? _flashTimer;
@@ -133,33 +130,22 @@ class DiagnosticProvider extends ChangeNotifier {
 
     final factId = problem.factId;
     if (factId != null) {
-      final existing = await _factCardDao.getByFactId(factId);
-      final base = existing ??
-          FactCard(
-            factId: factId,
-            intervalDays: 1,
-            easeFactor: kDefaultEaseFactor,
-            dueAt: endedAt,
-            reps: 0,
-            lapses: 0,
-            lastLatencyMs: latencyMs,
-          );
-      final rating = isCorrect
-          ? (latencyMs <= kDiagnosticFastLatencyMs
-              ? AttemptRating.good
-              : AttemptRating.hard)
-          : AttemptRating.again;
-      final scheduled = _srsScheduler.schedule(
-        base.copyWith(lastLatencyMs: latencyMs),
-        rating,
-        endedAt,
+      final int initialInterval = isCorrect
+          ? (latencyMs <= kDiagnosticFastLatencyMs ? 7 : 3)
+          : 1;
+      final int initialDueAt =
+          endedAt + initialInterval * 24 * 60 * 60 * 1000;
+      await _factCardDao.upsert(
+        FactCard(
+          factId: factId,
+          intervalDays: initialInterval,
+          easeFactor: kDefaultEaseFactor,
+          dueAt: initialDueAt,
+          reps: isCorrect ? 1 : 0,
+          lapses: isCorrect ? 0 : 1,
+          lastLatencyMs: latencyMs,
+        ),
       );
-      final updated = scheduled.copyWith(
-        intervalDays: rating == AttemptRating.good
-            ? 7
-            : (rating == AttemptRating.hard ? 3 : 1),
-      );
-      await _factCardDao.upsert(updated);
     }
 
     if (index < problems.length - 1) {

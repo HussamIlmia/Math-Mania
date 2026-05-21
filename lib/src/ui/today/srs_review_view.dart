@@ -72,17 +72,8 @@ class _SrsReviewViewState extends State<SrsReviewView> {
             ? AttemptRating.good
             : AttemptRating.hard)
         : AttemptRating.again;
-    final updatedCard = _scheduler.schedule(
-      card,
-      rating,
-      endedAt,
-    );
-    await _factCardDao.upsert(
-      updatedCard.copyWith(
-        lastLatencyMs: latency,
-        reps: correct ? card.reps + 1 : card.reps,
-      ),
-    );
+    final updatedCard = _scheduler.schedule(card, rating, endedAt);
+    await _factCardDao.upsert(updatedCard.copyWith(lastLatencyMs: latency));
     await _attemptDao.insertAttempt(
       TrainerAttempt(
         problemId: problem.id,

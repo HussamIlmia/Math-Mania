@@ -2,25 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import '/src/core/trainer_constants.dart';
 import '/src/data/db/dao/attempt_dao.dart';
-import '/src/data/db/dao/fact_card_dao.dart';
 import '/src/data/db/dao/lesson_progress_dao.dart';
-import '/src/data/models/trainer/drill_spec.dart';
 import '/src/data/models/trainer/lesson_progress.dart';
 import '/src/data/models/trainer/trainer_attempt.dart';
 import '/src/data/models/trainer/trainer_problem.dart';
 import '/src/data/repository/lesson_repository.dart';
 import '/src/data/repository/trick_generators.dart';
-import '/src/data/srs/srs_scheduler.dart';
 import '/src/data/timing/timing_service.dart';
 
 class DrillSessionProvider extends ChangeNotifier {
   DrillSessionProvider({required this.lessonId}) {
     _lessonRepository = GetIt.I.get<LessonRepository>();
     _attemptDao = GetIt.I.get<AttemptDao>();
-    _factCardDao = GetIt.I.get<FactCardDao>();
     _lessonProgressDao = GetIt.I.get<LessonProgressDao>();
     _timingService = GetIt.I.get<TimingService>();
-    _scheduler = GetIt.I.get<SrsScheduler>();
     _trickGenerators = const TrickGenerators();
     _load();
   }
@@ -28,10 +23,8 @@ class DrillSessionProvider extends ChangeNotifier {
   final String lessonId;
   late final LessonRepository _lessonRepository;
   late final AttemptDao _attemptDao;
-  late final FactCardDao _factCardDao;
   late final LessonProgressDao _lessonProgressDao;
   late final TimingService _timingService;
-  late final SrsScheduler _scheduler;
   late final TrickGenerators _trickGenerators;
 
   bool loading = true;
@@ -119,21 +112,37 @@ class DrillSessionProvider extends ChangeNotifier {
   }
 
   Future<void> _saveLessonResult() async {
-    final accuracy = (correct / total * 100).round();
+    final accuracy = (correct / total * 100).round().toDouble();
     final latencyMs = _medianLatency();
-    final state = (accuracy >= kMasteryAccuracyMinimumPercent &&
-            latencyMs <= kMasteryMedianLatencyMs)
+    final masteredNow = accuracy >= kMasteryAccuracyMinimumPercent &&
+        latencyMs <= kMasteryMedianLatencyMs;
+    final existing = await _lessonProgressDao.getByLessonId(lessonId);
+    final wasMastered = existing?.state == LessonState.mastered;
+    final nextState = (masteredNow || wasMastered)
         ? LessonState.mastered
         : LessonState.inProgress;
+    final bestAccuracy = existing == null
+        ? accuracy
+        : (accuracy > existing.bestAccuracy ? accuracy : existing.bestAccuracy);
+    final int? existingBestLatency =
+        existing != null && existing.bestMedianLatencyMs > 0
+            ? existing.bestMedianLatencyMs
+            : null;
+    final int bestLatencyMs = existingBestLatency == null
+        ? latencyMs
+        : (latencyMs > 0 && latencyMs < existingBestLatency
+            ? latencyMs
+            : existingBestLatency);
+    final masteredAt = wasMastered
+        ? existing!.masteredAt
+        : (masteredNow ? DateTime.now().millisecondsSinceEpoch : null);
     await _lessonProgressDao.upsert(
       LessonProgress(
         lessonId: lessonId,
-        state: state,
-        bestAccuracy: accuracy.toDouble(),
-        bestMedianLatencyMs: latencyMs,
-        masteredAt: state == LessonState.mastered
-            ? DateTime.now().millisecondsSinceEpoch
-            : null,
+        state: nextState,
+        bestAccuracy: bestAccuracy,
+        bestMedianLatencyMs: bestLatencyMs,
+        masteredAt: masteredAt,
       ),
     );
   }

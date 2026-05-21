@@ -19,9 +19,11 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     Future.delayed(Duration(seconds: 2)).then((value) async {
+      if (!mounted) return;
       final SharedPreferences prefs = GetIt.I.get<SharedPreferences>();
       final hasCompletedDiagnostic =
           prefs.getBool("diagnostic_complete") ?? false;
+      if (!mounted) return;
       Navigator.pushReplacementNamed(
         context,
         hasCompletedDiagnostic ? KeyUtil.today : KeyUtil.diagnostic,

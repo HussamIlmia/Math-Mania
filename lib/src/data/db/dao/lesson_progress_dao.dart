@@ -1,4 +1,3 @@
-import '/src/core/trainer_constants.dart';
 import '/src/data/db/app_database.dart';
 import '/src/data/models/trainer/lesson_progress.dart';
 import 'package:sqflite/sqflite.dart';

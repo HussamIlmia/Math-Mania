@@ -13,11 +13,11 @@ class TrickGenerators {
       final left = 12 + random.nextInt(88);
       final prompt = "$left x 11";
       final answer = (left * 11).toString();
-      final id = "mul11_${left}_$count_${list.length}";
+      final id = "mul11_${left}_${count}_${list.length}";
       list.add(
         TrainerProblem(
           id: id,
-          factId: "mul_${left}x11",
+          factId: null,
           lessonId: "lesson_mul11",
           prompt: prompt,
           expectedAnswer: answer,

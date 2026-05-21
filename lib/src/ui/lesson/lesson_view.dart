@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/src/core/app_constant.dart';
-import '/src/data/repository/lesson_repository.dart';
 import '/src/ui/lesson/lesson_provider.dart';
 import '/src/ui/lesson/lesson_slide_view.dart';
 

@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
-import '/src/core/trainer_constants.dart';
-import '/src/data/models/trainer/fact_card.dart';
-import '/src/data/srs/sm2_lite_scheduler.dart';
+import 'package:math_mania/src/core/trainer_constants.dart';
+import 'package:math_mania/src/data/models/trainer/fact_card.dart';
+import 'package:math_mania/src/data/srs/sm2_lite_scheduler.dart';
 
 void main() {
-  final scheduler = Sm2LiteScheduler();
+  const scheduler = Sm2LiteScheduler();
 
   test('Fresh card good path follows progression steps', () {
     final started = DateTime.now().millisecondsSinceEpoch;

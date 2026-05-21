@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 class TimingService {
   final Stopwatch _stopwatch = Stopwatch();
   int? _startAt;

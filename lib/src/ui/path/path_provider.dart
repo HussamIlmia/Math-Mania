@@ -41,14 +41,10 @@ class PathProvider extends ChangeNotifier {
   }
 
   bool isUnlocked(Lesson lesson) {
-    final current = progress[lesson.id]?.state ?? LessonState.locked;
     final prereqs = lesson.prerequisiteLessonIds ?? [];
     if (prereqs.isEmpty) {
       return true;
     }
-    return prereqs.every((id) {
-      final state = progress[id]?.state;
-      return state == LessonState.mastered;
-    });
+    return prereqs.every((id) => progress[id]?.state == LessonState.mastered);
   }
 }
