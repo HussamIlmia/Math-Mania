@@ -7,6 +7,16 @@ import 'package:get_it/get_it.dart';
 import '/src/ui/app/app.dart';
 import '/src/ui/app/theme_provider.dart';
 import '/src/ui/dashboard/dashboard_provider.dart';
+import '/src/data/db/app_database.dart';
+import '/src/data/db/dao/attempt_dao.dart';
+import '/src/data/db/dao/fact_card_dao.dart';
+import '/src/data/db/dao/fact_dao.dart';
+import '/src/data/db/dao/lesson_progress_dao.dart';
+import '/src/data/repository/fact_repository.dart';
+import '/src/data/repository/lesson_repository.dart';
+import '/src/data/srs/sm2_lite_scheduler.dart';
+import '/src/data/srs/srs_scheduler.dart';
+import '/src/data/timing/timing_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -57,7 +67,7 @@ Future<void> main() async {
 
   final sharedPreferences = await SharedPreferences.getInstance();
 
-  setupServiceLocator(sharedPreferences);
+  await setupServiceLocator(sharedPreferences);
   runApp(
     MultiProvider(
       providers: [
@@ -75,8 +85,51 @@ Future<void> main() async {
   );
 }
 
-void setupServiceLocator(SharedPreferences sharedPreferences) {
-  GetIt.I.registerSingleton<DashboardProvider>(
-    DashboardProvider(preferences: sharedPreferences),
-  );
+Future<void> setupServiceLocator(SharedPreferences sharedPreferences) async {
+  final getIt = GetIt.I;
+
+  if (!getIt.isRegistered<SharedPreferences>()) {
+    getIt.registerSingleton<SharedPreferences>(sharedPreferences);
+  }
+
+  final appDatabase = await AppDatabase.open();
+  if (!getIt.isRegistered<AppDatabase>()) {
+    getIt.registerSingleton<AppDatabase>(appDatabase);
+  }
+
+  if (!getIt.isRegistered<FactDao>()) {
+    getIt.registerSingleton<FactDao>(FactDao(getIt<AppDatabase>()));
+  }
+
+  if (!getIt.isRegistered<FactCardDao>()) {
+    getIt.registerSingleton<FactCardDao>(FactCardDao(getIt<AppDatabase>()));
+  }
+
+  if (!getIt.isRegistered<AttemptDao>()) {
+    getIt.registerSingleton<AttemptDao>(AttemptDao(getIt<AppDatabase>()));
+  }
+
+  if (!getIt.isRegistered<LessonProgressDao>()) {
+    getIt.registerSingleton<LessonProgressDao>(
+      LessonProgressDao(getIt<AppDatabase>()),
+    );
+  }
+
+  if (!getIt.isRegistered<FactRepository>()) {
+    getIt.registerSingleton<FactRepository>(FactRepository(getIt<FactDao>()));
+  }
+
+  if (!getIt.isRegistered<LessonRepository>()) {
+    getIt.registerSingleton<LessonRepository>(LessonRepository());
+  }
+
+  if (!getIt.isRegistered<SrsScheduler>()) {
+    getIt.registerSingleton<SrsScheduler>(Sm2LiteScheduler());
+  }
+
+  if (!getIt.isRegistered<TimingService>()) {
+    getIt.registerSingleton<TimingService>(TimingService());
+  }
+
+  await getIt<FactRepository>().seedIfEmpty();
 }

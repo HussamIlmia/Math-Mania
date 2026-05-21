@@ -17,7 +17,14 @@ enum GameCategoryType {
   NUMBER_PYRAMID,
 }
 
-enum PuzzleType { MATH_PUZZLE, MEMORY_PUZZLE, BRAIN_PUZZLE }
+enum PuzzleType {
+  TODAY,
+  PATH,
+  FREE_PLAY,
+  MATH_PUZZLE,
+  MEMORY_PUZZLE,
+  BRAIN_PUZZLE,
+}
 
 enum TimerStatus { restart, play, pause }
 
@@ -31,6 +38,11 @@ class KeyUtil {
   static const String splash = 'Splash';
   static const String dashboard = 'Dashboard';
   static const String home = 'Home';
+  static const String diagnostic = 'Diagnostic';
+  static const String today = 'Today';
+  static const String path = 'Path';
+  static const String lesson = 'Lesson';
+  static const String drillSession = 'DrillSession';
 
   static const String calculator = 'Calculator';
   static const String guessSign = 'GuessSign';
@@ -46,36 +58,37 @@ class KeyUtil {
 
   static List<Dashboard> dashboardItems = [
     Dashboard(
-      puzzleType: PuzzleType.MATH_PUZZLE,
+      puzzleType: PuzzleType.TODAY,
       colorTuple: Tuple2(Color(0xff4895EF), Color(0xff3f37c9)),
       opacity: 0.07,
       icon: AppAssets.icMathPuzzle,
       outlineIcon: AppAssets.icMathPuzzleOutline,
-      subtitle: "Each game with simple calculation with different approach.",
-      title: "Math Puzzle",
+      subtitle: "Review scheduled drills from your last sessions.",
+      title: "Today",
       fillIconColor: Color(0xff4895ef),
       outlineIconColor: Color(0xff436add),
     ),
     Dashboard(
-      puzzleType: PuzzleType.MEMORY_PUZZLE,
+      puzzleType: PuzzleType.PATH,
       colorTuple: Tuple2(Color(0xff9f2beb), Color(0xff560bad)),
       opacity: 0.07,
-      icon: AppAssets.icMemoryPuzzle,
-      outlineIcon: AppAssets.icMemoryPuzzleOutline,
-      subtitle: "Memorise numbers & signs before applying calculation to them.",
-      title: "Memory Puzzle",
+      icon: AppAssets.icTrainBrain,
+      outlineIcon: AppAssets.icTrainBrainOutline,
+      subtitle:
+          "Follow a path of lessons and unlock the next trick when you master one.",
+      title: "Path",
       fillIconColor: Color(0xff9f2beb),
       outlineIconColor: Color(0xff560BAD),
     ),
     Dashboard(
-      puzzleType: PuzzleType.BRAIN_PUZZLE,
+      puzzleType: PuzzleType.FREE_PLAY,
       colorTuple: Tuple2(Color(0xfff72585), Color(0xffb5179e)),
       opacity: 0.12,
-      icon: AppAssets.icTrainBrain,
-      outlineIcon: AppAssets.icTrainBrainOutline,
+      icon: AppAssets.icMemoryPuzzle,
+      outlineIcon: AppAssets.icMemoryPuzzleOutline,
       subtitle:
-          "Enhance logical thinking, concentration and core cognitive skills.",
-      title: "Train Your Brain",
+          "Open the original 11-game arcade collection and keep your scores.",
+      title: "Free Play",
       fillIconColor: Color(0xfff72585),
       outlineIconColor: Color(0xffB5179E),
     ),

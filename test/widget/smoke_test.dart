@@ -2,30 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '/src/ui/app/app.dart';
 import '/src/ui/app/theme_provider.dart';
 import '/src/ui/dashboard/dashboard_provider.dart';
-import 'package:math_mania/src/ui/app/app.dart';
 
 void main() {
-  testWidgets('Math Mania smoke test', (WidgetTester tester) async {
+  testWidgets('Smoke: app root renders', (WidgetTester tester) async {
     SharedPreferences.setMockInitialValues(<String, Object>{});
     final prefs = await SharedPreferences.getInstance();
-
     await tester.pumpWidget(
       MultiProvider(
         providers: [
           ChangeNotifierProvider(
-            create: (context) => ThemeProvider(sharedPreferences: prefs),
+            create: (_) => ThemeProvider(sharedPreferences: prefs),
           ),
           ChangeNotifierProvider(
-            create: (context) => DashboardProvider(preferences: prefs),
+            create: (_) => DashboardProvider(preferences: prefs),
           ),
         ],
         child: const MyApp(firebaseAnalytics: null),
       ),
     );
     await tester.pumpAndSettle();
-
-    expect(find.text("Math Mania"), findsOneWidget);
+    expect(find.text('Math Mania'), findsOneWidget);
   });
 }

@@ -23,137 +23,139 @@ class DashboardProvider extends ChangeNotifier {
   }
 
   List<GameCategory> getGameByPuzzleType(PuzzleType puzzleType) {
-    _list = <GameCategory>[];
     switch (puzzleType) {
+      case PuzzleType.FREE_PLAY:
+        _list = _mathPuzzleGames() + _memoryPuzzleGames() + _brainPuzzleGames();
+        break;
       case PuzzleType.MATH_PUZZLE:
-        list.add(
-          GameCategory(
-            1,
-            "Calculator",
-            "calculator",
-            GameCategoryType.CALCULATOR,
-            KeyUtil.calculator,
-            getScoreboard("calculator"),
-            AppAssets.icCalculator,
-          ),
-        );
-        list.add(
-          GameCategory(
-            2,
-            "Guess the sign?",
-            "sign",
-            GameCategoryType.GUESS_SIGN,
-            KeyUtil.guessSign,
-            getScoreboard("sign"),
-            AppAssets.icGuessTheSign,
-          ),
-        );
-        list.add(
-          GameCategory(
-            5,
-            "Correct answer",
-            "correct_answer",
-            GameCategoryType.CORRECT_ANSWER,
-            KeyUtil.correctAnswer,
-            getScoreboard("correct_answer"),
-            AppAssets.icCorrectAnswer,
-          ),
-        );
-        list.add(
-          GameCategory(
-            8,
-            "Quick calculation",
-            "quick_calclation",
-            GameCategoryType.QUICK_CALCULATION,
-            KeyUtil.quickCalculation,
-            getScoreboard("quick_calclation"),
-            AppAssets.icQuickCalculation,
-          ),
-        );
+        _list = _mathPuzzleGames();
         break;
       case PuzzleType.MEMORY_PUZZLE:
-        list.add(
-          GameCategory(
-            7,
-            "Mental arithmetic",
-            "mental_arithmatic",
-            GameCategoryType.MENTAL_ARITHMETIC,
-            KeyUtil.mentalArithmetic,
-            getScoreboard("mental_arithmatic"),
-            AppAssets.icMentalArithmetic,
-          ),
-        );
-        list.add(
-          GameCategory(
-            3,
-            "Square root",
-            "square_root",
-            GameCategoryType.SQUARE_ROOT,
-            KeyUtil.squareRoot,
-            getScoreboard("square_root"),
-            AppAssets.icSquareRoot,
-          ),
-        );
-        list.add(
-          GameCategory(
-            9,
-            "Math Grid",
-            "math_machine",
-            GameCategoryType.MATH_GRID,
-            KeyUtil.mathGrid,
-            getScoreboard("math_machine"),
-            AppAssets.icMathGrid,
-          ),
-        );
-        list.add(
-          GameCategory(
-            4,
-            "Mathematical pairs",
-            "math_pairs",
-            GameCategoryType.MATH_PAIRS,
-            KeyUtil.mathPairs,
-            getScoreboard("math_pairs"),
-            AppAssets.icMathematicalPairs,
-          ),
-        );
+        _list = _memoryPuzzleGames();
         break;
       case PuzzleType.BRAIN_PUZZLE:
-        list.add(
-          GameCategory(
-            6,
-            "Magic triangle",
-            "magic_tringle",
-            GameCategoryType.MAGIC_TRIANGLE,
-            KeyUtil.magicTriangle,
-            getScoreboard("magic_tringle"),
-            AppAssets.icMagicTriangle,
-          ),
-        );
-        list.add(
-          GameCategory(
-            10,
-            "Picture Puzzle",
-            "picture_puzzle",
-            GameCategoryType.PICTURE_PUZZLE,
-            KeyUtil.picturePuzzle,
-            getScoreboard("picture_puzzle"),
-            AppAssets.icPicturePuzzle,
-          ),
-        );
-        list.add(
-          GameCategory(
-            11,
-            "Number Pyramid",
-            "number_pyramid",
-            GameCategoryType.NUMBER_PYRAMID,
-            KeyUtil.numberPyramid,
-            getScoreboard("number_pyramid"),
-            AppAssets.icNumberPyramid,
-          ),
-        );
+        _list = _brainPuzzleGames();
+        break;
+      case PuzzleType.TODAY:
+      case PuzzleType.PATH:
+        _list = <GameCategory>[];
         break;
     }
     return _list;
+  }
+
+  List<GameCategory> _mathPuzzleGames() {
+    return <GameCategory>[
+      GameCategory(
+        1,
+        "Calculator",
+        "calculator",
+        GameCategoryType.CALCULATOR,
+        KeyUtil.calculator,
+        getScoreboard("calculator"),
+        AppAssets.icCalculator,
+      ),
+      GameCategory(
+        2,
+        "Guess the sign?",
+        "sign",
+        GameCategoryType.GUESS_SIGN,
+        KeyUtil.guessSign,
+        getScoreboard("sign"),
+        AppAssets.icGuessTheSign,
+      ),
+      GameCategory(
+        5,
+        "Correct answer",
+        "correct_answer",
+        GameCategoryType.CORRECT_ANSWER,
+        KeyUtil.correctAnswer,
+        getScoreboard("correct_answer"),
+        AppAssets.icCorrectAnswer,
+      ),
+      GameCategory(
+        8,
+        "Quick calculation",
+        "quick_calclation",
+        GameCategoryType.QUICK_CALCULATION,
+        KeyUtil.quickCalculation,
+        getScoreboard("quick_calclation"),
+        AppAssets.icQuickCalculation,
+      ),
+    ];
+  }
+
+  List<GameCategory> _memoryPuzzleGames() {
+    return <GameCategory>[
+      GameCategory(
+        7,
+        "Mental arithmetic",
+        "mental_arithmatic",
+        GameCategoryType.MENTAL_ARITHMETIC,
+        KeyUtil.mentalArithmetic,
+        getScoreboard("mental_arithmatic"),
+        AppAssets.icMentalArithmetic,
+      ),
+      GameCategory(
+        3,
+        "Square root",
+        "square_root",
+        GameCategoryType.SQUARE_ROOT,
+        KeyUtil.squareRoot,
+        getScoreboard("square_root"),
+        AppAssets.icSquareRoot,
+      ),
+      GameCategory(
+        9,
+        "Math Grid",
+        "math_machine",
+        GameCategoryType.MATH_GRID,
+        KeyUtil.mathGrid,
+        getScoreboard("math_machine"),
+        AppAssets.icMathGrid,
+      ),
+      GameCategory(
+        4,
+        "Mathematical pairs",
+        "math_pairs",
+        GameCategoryType.MATH_PAIRS,
+        KeyUtil.mathPairs,
+        getScoreboard("math_pairs"),
+        AppAssets.icMathematicalPairs,
+      ),
+    ];
+  }
+
+  List<GameCategory> _brainPuzzleGames() {
+    return <GameCategory>[
+      GameCategory(
+        6,
+        "Magic triangle",
+        "magic_tringle",
+        GameCategoryType.MAGIC_TRIANGLE,
+        KeyUtil.magicTriangle,
+        getScoreboard("magic_tringle"),
+        AppAssets.icMagicTriangle,
+      ),
+      GameCategory(
+        10,
+        "Picture Puzzle",
+        "picture_puzzle",
+        GameCategoryType.PICTURE_PUZZLE,
+        KeyUtil.picturePuzzle,
+        getScoreboard("picture_puzzle"),
+        AppAssets.icPicturePuzzle,
+      ),
+      GameCategory(
+        11,
+        "Number Pyramid",
+        "number_pyramid",
+        GameCategoryType.NUMBER_PYRAMID,
+        KeyUtil.numberPyramid,
+        getScoreboard("number_pyramid"),
+        AppAssets.icNumberPyramid,
+      ),
+    ];
   }
 
   ScoreBoard getScoreboard(String gameCategoryType) {

@@ -5,6 +5,11 @@ import '/src/ui/calculator/calculator_view.dart';
 import '/src/ui/correctAnswer/correct_answer_view.dart';
 import '/src/ui/dashboard/dashboard_view.dart';
 import '/src/ui/home/home_view.dart';
+import '/src/ui/drill/drill_session_view.dart';
+import '/src/ui/lesson/lesson_view.dart';
+import '/src/ui/onboarding/diagnostic_view.dart';
+import '/src/ui/path/path_view.dart';
+import '/src/ui/today/today_view.dart';
 // import '/src/ui/home/home_view1.dart';
 import '/src/ui/magicTriangle/magic_triangle_view.dart';
 import '/src/ui/mathGrid/math_grid_view.dart';
@@ -21,6 +26,15 @@ import '/src/utility/tuple.dart';
 var appRoutes = {
   KeyUtil.dashboard: (context) => DashboardView(),
   KeyUtil.splash: (context) => SplashView(),
+  KeyUtil.diagnostic: (context) => DiagnosticView(),
+  KeyUtil.today: (context) => TodayView(),
+  KeyUtil.path: (context) => PathView(),
+  KeyUtil.lesson: (context) => LessonView(
+    lessonId: ModalRoute.of(context)?.settings.arguments as String?,
+  ),
+  KeyUtil.drillSession: (context) => DrillSessionView(
+    lessonId: ModalRoute.of(context)?.settings.arguments as String?,
+  ),
   KeyUtil.home: (context) => HomeView(
     tuple2:
         ModalRoute.of(context)?.settings.arguments as Tuple2<Dashboard, double>,

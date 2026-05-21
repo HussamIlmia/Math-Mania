@@ -2,9 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 import '/src/core/app_constant.dart';
 import '/src/ui/splash/animated_grid_item_view.dart';
 import '/src/utility/tuple.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -16,8 +18,14 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 2)).then((value) {
-      Navigator.pushReplacementNamed(context, KeyUtil.dashboard);
+    Future.delayed(Duration(seconds: 2)).then((value) async {
+      final SharedPreferences prefs = GetIt.I.get<SharedPreferences>();
+      final hasCompletedDiagnostic =
+          prefs.getBool("diagnostic_complete") ?? false;
+      Navigator.pushReplacementNamed(
+        context,
+        hasCompletedDiagnostic ? KeyUtil.today : KeyUtil.diagnostic,
+      );
     });
     super.initState();
   }

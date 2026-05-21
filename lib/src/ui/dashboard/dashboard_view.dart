@@ -265,14 +265,22 @@ class _DashboardViewState extends State<DashboardView>
                           dashboard: KeyUtil.dashboardItems[0],
                           position: _offsetLeftEnter,
                           onTab: () {
+                            final puzzleType = KeyUtil.dashboardItems[0].puzzleType;
                             Navigator.pushNamedAndRemoveUntil(
                               context,
-                              KeyUtil.home,
+                              puzzleType == PuzzleType.TODAY
+                                  ? KeyUtil.today
+                                  : (puzzleType == PuzzleType.PATH
+                                        ? KeyUtil.path
+                                        : KeyUtil.home),
                               ModalRoute.withName(KeyUtil.dashboard),
-                              arguments: Tuple2(
-                                KeyUtil.dashboardItems[0],
-                                MediaQuery.of(context).padding.top,
-                              ),
+                              arguments:
+                                  puzzleType == PuzzleType.FREE_PLAY
+                                      ? Tuple2(
+                                          KeyUtil.dashboardItems[0],
+                                          MediaQuery.of(context).padding.top,
+                                        )
+                                      : null,
                             );
                           },
                         ),
@@ -281,14 +289,22 @@ class _DashboardViewState extends State<DashboardView>
                           dashboard: KeyUtil.dashboardItems[1],
                           position: _offsetRightEnter,
                           onTab: () {
+                            final puzzleType = KeyUtil.dashboardItems[1].puzzleType;
                             Navigator.pushNamedAndRemoveUntil(
                               context,
-                              KeyUtil.home,
+                              puzzleType == PuzzleType.TODAY
+                                  ? KeyUtil.today
+                                  : (puzzleType == PuzzleType.PATH
+                                      ? KeyUtil.path
+                                      : KeyUtil.home),
                               ModalRoute.withName(KeyUtil.dashboard),
-                              arguments: Tuple2(
-                                KeyUtil.dashboardItems[1],
-                                MediaQuery.of(context).padding.top,
-                              ),
+                              arguments:
+                                  puzzleType == PuzzleType.FREE_PLAY
+                                      ? Tuple2(
+                                          KeyUtil.dashboardItems[1],
+                                          MediaQuery.of(context).padding.top,
+                                        )
+                                      : null,
                             );
                           },
                         ),
@@ -297,14 +313,22 @@ class _DashboardViewState extends State<DashboardView>
                           dashboard: KeyUtil.dashboardItems[2],
                           position: _offsetLeftEnter,
                           onTab: () {
+                            final puzzleType = KeyUtil.dashboardItems[2].puzzleType;
                             Navigator.pushNamedAndRemoveUntil(
                               context,
-                              KeyUtil.home,
+                              puzzleType == PuzzleType.TODAY
+                                  ? KeyUtil.today
+                                  : (puzzleType == PuzzleType.PATH
+                                      ? KeyUtil.path
+                                      : KeyUtil.home),
                               ModalRoute.withName(KeyUtil.dashboard),
-                              arguments: Tuple2(
-                                KeyUtil.dashboardItems[2],
-                                MediaQuery.of(context).padding.top,
-                              ),
+                              arguments:
+                                  puzzleType == PuzzleType.FREE_PLAY
+                                      ? Tuple2(
+                                          KeyUtil.dashboardItems[2],
+                                          MediaQuery.of(context).padding.top,
+                                        )
+                                      : null,
                             );
                           },
                         ),
