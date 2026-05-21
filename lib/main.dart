@@ -68,16 +68,15 @@ Future<void> main() async {
         ),
         ChangeNotifierProvider<DashboardProvider>(
           create: (context) => GetIt.I.get<DashboardProvider>(),
-        )
+        ),
       ],
-      child: MyApp(
-        firebaseAnalytics: firebaseAnalytics,
-      ),
+      child: MyApp(firebaseAnalytics: firebaseAnalytics),
     ),
   );
 }
 
-setupServiceLocator(SharedPreferences sharedPreferences) {
+void setupServiceLocator(SharedPreferences sharedPreferences) {
   GetIt.I.registerSingleton<DashboardProvider>(
-      DashboardProvider(preferences: sharedPreferences));
+    DashboardProvider(preferences: sharedPreferences),
+  );
 }

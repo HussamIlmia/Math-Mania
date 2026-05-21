@@ -8,12 +8,12 @@ class CommonNeumorphicView extends StatelessWidget {
   final bool isLarge;
 
   const CommonNeumorphicView({
-    Key? key,
+    super.key,
     required this.child,
     this.height = 56,
     this.width = 56,
     this.isLarge = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +23,13 @@ class CommonNeumorphicView extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(Theme.of(context).brightness == Brightness.light
-              ? (isLarge ? AppAssets.bgLargeButton : AppAssets.bgSmallButton)
-              : (isLarge
-                  ? AppAssets.bgLargeDarkButton
-                  : AppAssets.bgSmallDarkButton)),
+          image: AssetImage(
+            Theme.of(context).brightness == Brightness.light
+                ? (isLarge ? AppAssets.bgLargeButton : AppAssets.bgSmallButton)
+                : (isLarge
+                      ? AppAssets.bgLargeDarkButton
+                      : AppAssets.bgSmallDarkButton),
+          ),
         ),
       ),
       child: child,

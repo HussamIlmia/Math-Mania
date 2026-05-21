@@ -5,10 +5,7 @@ import '/src/data/models/mental_arithmetic.dart';
 class MentalArithmeticQuestionView extends StatefulWidget {
   final MentalArithmetic currentState;
 
-  const MentalArithmeticQuestionView({
-    Key? key,
-    required this.currentState,
-  }) : super(key: key);
+  const MentalArithmeticQuestionView({super.key, required this.currentState});
 
   @override
   _MentalArithmeticQuestionViewState createState() =>
@@ -16,7 +13,8 @@ class MentalArithmeticQuestionView extends StatefulWidget {
 }
 
 class _MentalArithmeticQuestionViewState
-    extends State<MentalArithmeticQuestionView> with TickerProviderStateMixin {
+    extends State<MentalArithmeticQuestionView>
+    with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<AlignmentGeometry> _animation;
   late Animation<AlignmentGeometry> _animation1;
@@ -28,71 +26,56 @@ class _MentalArithmeticQuestionViewState
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 1500),
-      vsync: this,
-    )
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          if (index < 3) {
-            index++;
-            _controller.forward(from: 0);
-          }
-        }
-      })
-      ..forward();
+    _controller =
+        AnimationController(
+            duration: const Duration(milliseconds: 1500),
+            vsync: this,
+          )
+          ..addStatusListener((status) {
+            if (status == AnimationStatus.completed) {
+              if (index < 3) {
+                index++;
+                _controller.forward(from: 0);
+              }
+            }
+          })
+          ..forward();
 
-    _animation = Tween<AlignmentGeometry>(
-      begin: Alignment.centerRight,
-      end: Alignment.center,
-    ).animate(
+    _animation =
+        Tween<AlignmentGeometry>(
+          begin: Alignment.centerRight,
+          end: Alignment.center,
+        ).animate(
+          CurvedAnimation(
+            parent: _controller,
+            curve: Interval(0.0, 0.8, curve: Curves.ease),
+          ),
+        );
+
+    _animation1 =
+        Tween<AlignmentGeometry>(
+          begin: Alignment.center,
+          end: Alignment.centerLeft,
+        ).animate(
+          CurvedAnimation(
+            parent: _controller,
+            curve: Interval(0.2, 1.0, curve: Curves.ease),
+          ),
+        );
+
+    _opacityAnimationOut = Tween<double>(begin: 1.0, end: 0.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: Interval(
-          0.0,
-          0.8,
-          curve: Curves.ease,
-        ),
+        curve: Interval(0.0, 0.8, curve: Curves.ease),
       ),
     );
 
-    _animation1 = Tween<AlignmentGeometry>(
-      begin: Alignment.center,
-      end: Alignment.centerLeft,
-    ).animate(
+    _opacityAnimationIn = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: Interval(
-          0.2,
-          1.0,
-          curve: Curves.ease,
-        ),
+        curve: Interval(0.2, 1.0, curve: Curves.ease),
       ),
     );
-
-    _opacityAnimationOut = Tween<double>(
-      begin: 1.0,
-      end: 0.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Interval(
-        0.0,
-        0.8,
-        curve: Curves.ease,
-      ),
-    ));
-
-    _opacityAnimationIn = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Interval(
-        0.2,
-        1.0,
-        curve: Curves.ease,
-      ),
-    ));
   }
 
   @override
@@ -118,10 +101,7 @@ class _MentalArithmeticQuestionViewState
                 opacity: _opacityAnimationIn.value,
                 child: Text(
                   index != 3 ? widget.currentState.questionList[index] : "",
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w700),
                 ),
               ),
             );
@@ -136,10 +116,7 @@ class _MentalArithmeticQuestionViewState
                 opacity: _opacityAnimationOut.value,
                 child: Text(
                   index == 0 ? "" : widget.currentState.questionList[index - 1],
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w700),
                 ),
               ),
             );

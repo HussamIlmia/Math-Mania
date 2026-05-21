@@ -3,7 +3,7 @@ import '/src/core/app_assets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MathRiddleView extends StatelessWidget {
-  const MathRiddleView({Key? key}) : super(key: key);
+  const MathRiddleView({super.key});
 
   Future<void> _launchURL() async {
     final url = Uri.parse('https://pabitrabanerjee.me/Math-Mania-History');
@@ -22,16 +22,13 @@ class MathRiddleView extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              AppAssets.icAppMathRiddle,
-              width: 38,
-              height: 38,
-            ),
+            Image.asset(AppAssets.icAppMathRiddle, width: 38, height: 38),
             SizedBox(width: 8),
             Text(
               "Complete Guideline",
-              style:
-                  Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 18),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge!.copyWith(fontSize: 18),
             ),
           ],
         ),
@@ -68,9 +65,9 @@ class MathRiddleView extends StatelessWidget {
                 child: Text(
                   "Try it Now",
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
+                    fontSize: 18,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

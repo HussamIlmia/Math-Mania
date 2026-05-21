@@ -33,15 +33,15 @@ class MathUtil {
   }
 
   static int generateRandomAnswer(int min, int max) {
-    final _random = new Random();
-    int result = min + _random.nextInt(max - min);
+    final random = Random();
+    int result = min + random.nextInt(max - min);
     return result;
   }
 
   static String generateRandomSign() {
     var x = ['/', '*', '-', '+'];
-    final _random = new Random();
-    int result = _random.nextInt(4);
+    final random = Random();
+    int result = random.nextInt(4);
     return x[result];
   }
 
@@ -51,14 +51,15 @@ class MathUtil {
       ['/', '*', '-', '+'],
       ['/', '*', '-', '+'],
       ['/', '*', '-', '+'],
-      ['/', '*', '-', '+']
+      ['/', '*', '-', '+'],
     ];
 
     while (listOfSign.length < count) {
       int row = Random().nextInt(4);
       int col = Random().nextInt(4);
-      if (listOfSign.length == 0 || list[row][col] != listOfSign.last)
+      if (listOfSign.isEmpty || list[row][col] != listOfSign.last) {
         listOfSign.add(list[row][col]);
+      }
     }
     return listOfSign;
   }
@@ -77,9 +78,9 @@ class MathUtil {
     while (listOfSign.length < count) {
       int row = Random().nextInt(max - min);
       int col = Random().nextInt(max - min);
-      if (listOfSign.length == 0 ||
-          list[row][col].toString() != listOfSign.last)
+      if (listOfSign.isEmpty || list[row][col].toString() != listOfSign.last) {
         listOfSign.add(list[row][col].toString());
+      }
     }
     return listOfSign;
   }
@@ -135,7 +136,7 @@ class MathUtil {
       }
     }
     listTemp.shuffle();
-    if (listTemp.length > 0) {
+    if (listTemp.isNotEmpty) {
       var x = listTemp[Random().nextInt(listTemp.length)];
       return Expression(
         firstOperand: x.keys.first,
@@ -153,11 +154,13 @@ class MathUtil {
   static Expression? getMixExp(int min, int max) {
     int operand = int.parse(MathUtil.generateRandomNumber(min, max, 1).first);
     var signList = MathUtil.generateRandomSign1(2);
-    String firstSign = (MathUtil.getPrecedence(signList[0]) >=
+    String firstSign =
+        (MathUtil.getPrecedence(signList[0]) >=
             MathUtil.getPrecedence(signList[1]))
         ? signList[0]
         : "";
-    String secondSign = (MathUtil.getPrecedence(signList[0]) >=
+    String secondSign =
+        (MathUtil.getPrecedence(signList[0]) >=
             MathUtil.getPrecedence(signList[1]))
         ? ""
         : signList[1];
@@ -181,22 +184,25 @@ class MathUtil {
     if (expression != null) {
       switch (firstSign != "" ? signList[1] : signList[0]) {
         case "+":
-          if (firstSign != "")
+          if (firstSign != "") {
             finalExpression = Expression(
-                firstOperand: expression.firstOperand,
-                operator1: expression.operator1,
-                secondOperand: expression.secondOperand,
-                operator2: "+",
-                thirdOperand: operand.toString(),
-                answer: expression.answer + operand);
-          else
+              firstOperand: expression.firstOperand,
+              operator1: expression.operator1,
+              secondOperand: expression.secondOperand,
+              operator2: "+",
+              thirdOperand: operand.toString(),
+              answer: expression.answer + operand,
+            );
+          } else {
             finalExpression = Expression(
-                firstOperand: operand.toString(),
-                operator1: "+",
-                secondOperand: expression.firstOperand,
-                operator2: expression.operator1,
-                thirdOperand: expression.secondOperand,
-                answer: operand + expression.answer);
+              firstOperand: operand.toString(),
+              operator1: "+",
+              secondOperand: expression.firstOperand,
+              operator2: expression.operator1,
+              thirdOperand: expression.secondOperand,
+              answer: operand + expression.answer,
+            );
+          }
           break;
         case "-":
           if (firstSign != "") {
@@ -204,44 +210,49 @@ class MathUtil {
               finalExpression = null;
             } else {
               finalExpression = Expression(
-                  firstOperand: expression.firstOperand,
-                  operator1: expression.operator1,
-                  secondOperand: expression.secondOperand,
-                  operator2: "-",
-                  thirdOperand: operand.toString(),
-                  answer: expression.answer - operand);
+                firstOperand: expression.firstOperand,
+                operator1: expression.operator1,
+                secondOperand: expression.secondOperand,
+                operator2: "-",
+                thirdOperand: operand.toString(),
+                answer: expression.answer - operand,
+              );
             }
           } else {
             if ((operand - expression.answer) < 0) {
               finalExpression = null;
             } else {
               finalExpression = Expression(
-                  firstOperand: operand.toString(),
-                  operator1: "-",
-                  secondOperand: expression.firstOperand,
-                  operator2: expression.operator1,
-                  thirdOperand: expression.secondOperand,
-                  answer: operand - expression.answer);
+                firstOperand: operand.toString(),
+                operator1: "-",
+                secondOperand: expression.firstOperand,
+                operator2: expression.operator1,
+                thirdOperand: expression.secondOperand,
+                answer: operand - expression.answer,
+              );
             }
           }
           break;
         case "*":
-          if (firstSign != "")
+          if (firstSign != "") {
             finalExpression = Expression(
-                firstOperand: expression.firstOperand,
-                operator1: expression.operator1,
-                secondOperand: expression.secondOperand,
-                operator2: "*",
-                thirdOperand: operand.toString(),
-                answer: expression.answer * operand);
-          else
+              firstOperand: expression.firstOperand,
+              operator1: expression.operator1,
+              secondOperand: expression.secondOperand,
+              operator2: "*",
+              thirdOperand: operand.toString(),
+              answer: expression.answer * operand,
+            );
+          } else {
             finalExpression = Expression(
-                firstOperand: operand.toString(),
-                operator1: "*",
-                secondOperand: expression.firstOperand,
-                operator2: expression.operator1,
-                thirdOperand: expression.secondOperand,
-                answer: operand * expression.answer);
+              firstOperand: operand.toString(),
+              operator1: "*",
+              secondOperand: expression.firstOperand,
+              operator2: expression.operator1,
+              thirdOperand: expression.secondOperand,
+              answer: operand * expression.answer,
+            );
+          }
 
           break;
         case "/":
@@ -250,24 +261,26 @@ class MathUtil {
               finalExpression = null;
             } else {
               finalExpression = Expression(
-                  firstOperand: expression.firstOperand,
-                  operator1: expression.operator1,
-                  secondOperand: expression.secondOperand,
-                  operator2: "/",
-                  thirdOperand: operand.toString(),
-                  answer: expression.answer ~/ operand);
+                firstOperand: expression.firstOperand,
+                operator1: expression.operator1,
+                secondOperand: expression.secondOperand,
+                operator2: "/",
+                thirdOperand: operand.toString(),
+                answer: expression.answer ~/ operand,
+              );
             }
           } else {
             if (operand % expression.answer == 0) {
               finalExpression = null;
             } else {
               finalExpression = Expression(
-                  firstOperand: operand.toString(),
-                  operator1: "/",
-                  secondOperand: expression.firstOperand,
-                  operator2: expression.operator1,
-                  thirdOperand: expression.secondOperand,
-                  answer: operand ~/ expression.answer);
+                firstOperand: operand.toString(),
+                operator1: "/",
+                secondOperand: expression.firstOperand,
+                operator2: expression.operator1,
+                thirdOperand: expression.secondOperand,
+                answer: operand ~/ expression.answer,
+              );
             }
           }
           break;
@@ -314,30 +327,33 @@ class MathUtil {
       switch (signList[1]) {
         case "+":
           finalExpression = Expression(
-              firstOperand: expression.firstOperand,
-              operator1: expression.operator1,
-              secondOperand: expression.secondOperand,
-              operator2: signList[1],
-              thirdOperand: operand.toString(),
-              answer: operand + expression.answer);
+            firstOperand: expression.firstOperand,
+            operator1: expression.operator1,
+            secondOperand: expression.secondOperand,
+            operator2: signList[1],
+            thirdOperand: operand.toString(),
+            answer: operand + expression.answer,
+          );
           break;
         case "-":
           finalExpression = Expression(
-              firstOperand: expression.firstOperand,
-              operator1: expression.operator1,
-              secondOperand: expression.secondOperand,
-              operator2: signList[1],
-              thirdOperand: operand.toString(),
-              answer: expression.answer - operand);
+            firstOperand: expression.firstOperand,
+            operator1: expression.operator1,
+            secondOperand: expression.secondOperand,
+            operator2: signList[1],
+            thirdOperand: operand.toString(),
+            answer: expression.answer - operand,
+          );
           break;
         case "*":
           finalExpression = Expression(
-              firstOperand: expression.firstOperand,
-              operator1: expression.operator1,
-              secondOperand: expression.secondOperand,
-              operator2: signList[1],
-              thirdOperand: operand.toString(),
-              answer: expression.answer * operand);
+            firstOperand: expression.firstOperand,
+            operator1: expression.operator1,
+            secondOperand: expression.secondOperand,
+            operator2: signList[1],
+            thirdOperand: operand.toString(),
+            answer: expression.answer * operand,
+          );
 
           break;
         case "/":
@@ -345,12 +361,13 @@ class MathUtil {
             finalExpression = null;
           } else {
             finalExpression = Expression(
-                firstOperand: expression.firstOperand,
-                operator1: expression.operator1,
-                secondOperand: expression.secondOperand,
-                operator2: signList[1],
-                thirdOperand: operand.toString(),
-                answer: expression.answer ~/ operand);
+              firstOperand: expression.firstOperand,
+              operator1: expression.operator1,
+              secondOperand: expression.secondOperand,
+              operator2: signList[1],
+              thirdOperand: operand.toString(),
+              answer: expression.answer ~/ operand,
+            );
           }
           break;
       }
@@ -474,9 +491,7 @@ class MathUtil {
   }
 }
 
-void main() {
-
-}
+void main() {}
 
 class Expression {
   final String firstOperand;

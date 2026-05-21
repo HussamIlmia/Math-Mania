@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class SineCurve extends Curve {
   final double count;
 
-  SineCurve({this.count = 3});
+  const SineCurve({this.count = 3});
 
   @override
   double transformInternal(double t) {
@@ -19,11 +19,11 @@ class CommonWrongAnswerAnimationView extends StatefulWidget {
   final Widget child;
 
   const CommonWrongAnswerAnimationView({
-    Key? key,
+    super.key,
     required this.currentScore,
     required this.oldScore,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   State<CommonWrongAnswerAnimationView> createState() =>
@@ -47,10 +47,7 @@ class _CommonWrongAnswerAnimationViewState
     _opacityAnimationOut = Tween(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: SineCurve(count: 3),
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: SineCurve(count: 3)));
   }
 
   @override

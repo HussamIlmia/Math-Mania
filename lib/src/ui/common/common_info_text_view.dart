@@ -7,10 +7,7 @@ import '../app/game_provider.dart';
 class CommonInfoTextView<T extends GameProvider> extends StatelessWidget {
   final GameCategoryType gameCategoryType;
 
-  const CommonInfoTextView({
-    required this.gameCategoryType,
-    Key? key,
-  }) : super(key: key);
+  const CommonInfoTextView({required this.gameCategoryType, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +23,13 @@ class CommonInfoTextView<T extends GameProvider> extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-                DialogInfoUtil.getInfoDialogData(gameCategoryType)
-                    .title
-                    .toUpperCase(),
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .copyWith(fontWeight: FontWeight.bold)),
+              DialogInfoUtil.getInfoDialogData(
+                gameCategoryType,
+              ).title.toUpperCase(),
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
+            ),
             SizedBox(width: 4),
             Icon(
               Icons.info,

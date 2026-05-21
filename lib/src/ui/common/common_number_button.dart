@@ -10,40 +10,39 @@ class CommonNumberButton extends StatelessWidget {
   final Tuple2<Color, Color> colorTuple;
 
   const CommonNumberButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onTab,
     this.height = 112,
     this.fontSize = 24,
     required this.colorTuple,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return CommonTabAnimationView(
       onTab: onTab,
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         elevation: 2,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(24),
           child: Container(
-              alignment: Alignment.center,
-              // height: height,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [colorTuple.item1, colorTuple.item2],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
+            alignment: Alignment.center,
+            // height: height,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [colorTuple.item1, colorTuple.item2],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
-              child: Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: LayoutBuilder(builder: (context, constraints) {
+            ),
+            child: Stack(
+              children: [
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
                       return Transform.translate(
                         offset: Offset(-constraints.maxHeight / 3.5, 0),
                         child: Transform.scale(
@@ -51,31 +50,34 @@ class CommonNumberButton extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             text,
-                            style:
-                                Theme.of(context).textTheme.titleMedium!.copyWith(
-                                      fontSize: 18,
-                                      color: Colors.white.withValues(alpha: 0.05),
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                            style: Theme.of(context).textTheme.titleMedium!
+                                .copyWith(
+                                  fontSize: 18,
+                                  color: Colors.white.withValues(alpha: 0.05),
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
                         ),
                       );
-                    }),
+                    },
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Text(text,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium!
-                              .copyWith(
-                                  fontSize: fontSize, color: Colors.white)),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Text(
+                      text,
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        fontSize: fontSize,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

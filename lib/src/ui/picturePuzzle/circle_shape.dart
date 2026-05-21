@@ -15,7 +15,10 @@ class CircleShape extends CustomPainter {
       ..strokeWidth = stroke;
 
     canvas.drawCircle(
-        Offset(size.width / 2, size.height / 2), size.width / 2, paint);
+      Offset(size.width / 2, size.height / 2),
+      size.width / 2,
+      paint,
+    );
   }
 
   @override

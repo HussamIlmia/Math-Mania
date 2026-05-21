@@ -8,10 +8,7 @@ import '/src/utility/tuple.dart';
 class TriangleInput4x4 extends StatelessWidget {
   final Tuple2<Color, Color> colorTuple;
 
-  const TriangleInput4x4({
-    Key? key,
-    required this.colorTuple,
-  }) : super(key: key);
+  const TriangleInput4x4({super.key, required this.colorTuple});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +71,7 @@ class TriangleInput4x4 extends StatelessWidget {
               colorTuple: colorTuple,
             ),
           ],
-        )
+        ),
       ],
     );
   }

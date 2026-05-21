@@ -11,7 +11,8 @@ class PicturePuzzleButton extends StatelessWidget {
   final Color shapeColor;
   final Tuple2<Color, Color> colorTuple;
 
-  PicturePuzzleButton({
+  const PicturePuzzleButton({
+    super.key,
     required this.picturePuzzleShape,
     required this.shapeColor,
     required this.colorTuple,
@@ -22,13 +23,14 @@ class PicturePuzzleButton extends StatelessWidget {
     switch (picturePuzzleShape.type) {
       case PicturePuzzleQuestionItemType.shape:
         return CustomPaint(
-          painter: picturePuzzleShape.picturePuzzleShapeType ==
+          painter:
+              picturePuzzleShape.picturePuzzleShapeType ==
                   PicturePuzzleShapeType.CIRCLE
               ? CircleShape(shapeColor, 1)
               : (picturePuzzleShape.picturePuzzleShapeType ==
-                      PicturePuzzleShapeType.TRIANGLE
-                  ? TriangleShape(shapeColor, 1)
-                  : SquareShape(shapeColor, 1)),
+                        PicturePuzzleShapeType.TRIANGLE
+                    ? TriangleShape(shapeColor, 1)
+                    : SquareShape(shapeColor, 1)),
           size: Size(38, 38),
         );
       case PicturePuzzleQuestionItemType.sign:
@@ -37,8 +39,9 @@ class PicturePuzzleButton extends StatelessWidget {
           width: 38,
           child: Text(
             picturePuzzleShape.text,
-            style:
-                Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 30),
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall!.copyWith(fontSize: 30),
           ),
         );
       case PicturePuzzleQuestionItemType.hint:
@@ -47,8 +50,9 @@ class PicturePuzzleButton extends StatelessWidget {
           width: 56,
           child: Text(
             picturePuzzleShape.text,
-            style:
-                Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 24),
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall!.copyWith(fontSize: 24),
           ),
         );
       case PicturePuzzleQuestionItemType.answer:

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'dart:async';
 import '/src/core/app_constant.dart';
@@ -29,16 +28,10 @@ class GameProvider<T> extends TimeProvider {
   late String result;
 
   GameProvider({
-    required TickerProvider vsync,
+    required super.vsync,
     required this.gameCategoryType,
     required this.difficultyType,
-  }) : super(
-          vsync: vsync,
-          totalTime: KeyUtil.getTimeUtil(
-            gameCategoryType,
-            difficultyType,
-          ),
-        );
+  }) : super(totalTime: KeyUtil.getTimeUtil(gameCategoryType, difficultyType));
 
   void startGame() async {
     result = "";
@@ -61,10 +54,11 @@ class GameProvider<T> extends TimeProvider {
         list.length - 2 == index) {
       list.addAll(getList(index ~/ 5 + 1));
     } else if (list.length - 1 == index) {
-      if (gameCategoryType == GameCategoryType.SQUARE_ROOT)
+      if (gameCategoryType == GameCategoryType.SQUARE_ROOT) {
         list.addAll(getList(index ~/ 5 + 2));
-      else
+      } else {
         list.addAll(getList(index ~/ 5 + 1));
+      }
     }
     result = "";
     index = index + 1;
@@ -131,27 +125,31 @@ class GameProvider<T> extends TimeProvider {
   List<T> getList(int level) {
     switch (gameCategoryType) {
       case GameCategoryType.CALCULATOR:
-        return CalculatorRepository.getCalculatorDataList(level);
+        return CalculatorRepository.getCalculatorDataList(level) as List<T>;
       case GameCategoryType.GUESS_SIGN:
-        return SignRepository.getSignDataList(level);
+        return SignRepository.getSignDataList(level) as List<T>;
       case GameCategoryType.SQUARE_ROOT:
-        return SquareRootRepository.getSquareDataList(level);
+        return SquareRootRepository.getSquareDataList(level) as List<T>;
       case GameCategoryType.MATH_PAIRS:
-        return MathPairsRepository.getMathPairsDataList(level);
+        return MathPairsRepository.getMathPairsDataList(level) as List<T>;
       case GameCategoryType.CORRECT_ANSWER:
-        return CorrectAnswerRepository.getCorrectAnswerDataList(level);
+        return CorrectAnswerRepository.getCorrectAnswerDataList(level)
+            as List<T>;
       case GameCategoryType.MAGIC_TRIANGLE:
-        return MagicTriangleRepository.getTriangleDataProviderList();
+        return MagicTriangleRepository.getTriangleDataProviderList() as List<T>;
       case GameCategoryType.MENTAL_ARITHMETIC:
-        return MentalArithmeticRepository.getMentalArithmeticDataList(level);
+        return MentalArithmeticRepository.getMentalArithmeticDataList(level)
+            as List<T>;
       case GameCategoryType.QUICK_CALCULATION:
-        return QuickCalculationRepository.getQuickCalculationDataList(level, 5);
+        return QuickCalculationRepository.getQuickCalculationDataList(level, 5)
+            as List<T>;
       case GameCategoryType.MATH_GRID:
-        return MathGridRepository.getMathGridData(level);
+        return MathGridRepository.getMathGridData(level) as List<T>;
       case GameCategoryType.PICTURE_PUZZLE:
-        return PicturePuzzleRepository.getPicturePuzzleDataList(level);
+        return PicturePuzzleRepository.getPicturePuzzleDataList(level)
+            as List<T>;
       case GameCategoryType.NUMBER_PYRAMID:
-        return NumberPyramidRepository.getPyramidDataList(level);
+        return NumberPyramidRepository.getPyramidDataList(level) as List<T>;
     }
   }
 }

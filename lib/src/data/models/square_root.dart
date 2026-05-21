@@ -6,8 +6,14 @@ class SquareRoot {
   String fourthAns;
   int answer;
 
-  SquareRoot(this.question, this.firstAns, this.secondAns, this.thirdAns,
-      this.fourthAns, this.answer);
+  SquareRoot(
+    this.question,
+    this.firstAns,
+    this.secondAns,
+    this.thirdAns,
+    this.fourthAns,
+    this.answer,
+  );
 
   @override
   String toString() {

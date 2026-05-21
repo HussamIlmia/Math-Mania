@@ -11,19 +11,22 @@ class MagicTriangle {
     required this.listTriangle,
     required this.answer,
   }) {
-    this.availableDigit = listGrid.length;
-    this.is3x3 = listGrid.length == 6 ? true : false;
+    availableDigit = listGrid.length;
+    is3x3 = listGrid.length == 6 ? true : false;
   }
 
   bool checkTotal() {
     if (is3x3) {
-      int sumOfLeftSide = (int.parse(listTriangle[0].value) +
+      int sumOfLeftSide =
+          (int.parse(listTriangle[0].value) +
           int.parse(listTriangle[1].value) +
           int.parse(listTriangle[3].value));
-      int sumOfRightSide = (int.parse(listTriangle[0].value) +
+      int sumOfRightSide =
+          (int.parse(listTriangle[0].value) +
           int.parse(listTriangle[2].value) +
           int.parse(listTriangle[5].value));
-      int sumOfBottomSide = (int.parse(listTriangle[3].value) +
+      int sumOfBottomSide =
+          (int.parse(listTriangle[3].value) +
           int.parse(listTriangle[4].value) +
           int.parse(listTriangle[5].value));
       if (answer == sumOfLeftSide &&
@@ -34,15 +37,18 @@ class MagicTriangle {
         return false;
       }
     } else {
-      int sumOfLeftSide = (int.parse(listTriangle[0].value) +
+      int sumOfLeftSide =
+          (int.parse(listTriangle[0].value) +
           int.parse(listTriangle[1].value) +
           int.parse(listTriangle[3].value) +
           int.parse(listTriangle[5].value));
-      int sumOfRightSide = (int.parse(listTriangle[0].value) +
+      int sumOfRightSide =
+          (int.parse(listTriangle[0].value) +
           int.parse(listTriangle[2].value) +
           int.parse(listTriangle[4].value) +
           int.parse(listTriangle[8].value));
-      int sumOfBottomSide = (int.parse(listTriangle[5].value) +
+      int sumOfBottomSide =
+          (int.parse(listTriangle[5].value) +
           int.parse(listTriangle[6].value) +
           int.parse(listTriangle[7].value) +
           int.parse(listTriangle[8].value));

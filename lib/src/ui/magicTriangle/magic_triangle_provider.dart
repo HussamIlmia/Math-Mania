@@ -1,22 +1,19 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import '/src/data/models/magic_triangle.dart';
 import '/src/core/app_constant.dart';
 import '/src/ui/app/game_provider.dart';
 
 class MagicTriangleProvider extends GameProvider<MagicTriangle> {
   int selectedTriangleIndex = 0;
+  @override
   final DifficultyType difficultyType;
 
-  MagicTriangleProvider({
-    required TickerProvider vsync,
-    required this.difficultyType,
-  }) : super(
-          vsync: vsync,
-          gameCategoryType: GameCategoryType.MAGIC_TRIANGLE,
-          difficultyType: difficultyType,
-        ) {
+  MagicTriangleProvider({required super.vsync, required this.difficultyType})
+    : super(
+        gameCategoryType: GameCategoryType.MAGIC_TRIANGLE,
+        difficultyType: difficultyType,
+      ) {
     startGame();
   }
 
@@ -31,7 +28,8 @@ class MagicTriangleProvider extends GameProvider<MagicTriangle> {
         notifyListeners();
       } else {
         int listGridIndex = currentState.listGrid.indexWhere(
-            (val) => val.value == input.value && val.isVisible == false);
+          (val) => val.value == input.value && val.isVisible == false,
+        );
         currentState.listTriangle[index].isActive = false;
         currentState.listTriangle[index].value = "";
         currentState.availableDigit = currentState.availableDigit + 1;
@@ -43,8 +41,9 @@ class MagicTriangleProvider extends GameProvider<MagicTriangle> {
 
   Future<void> checkResult(int index, MagicTriangleGrid digit) async {
     if (timerStatus != TimerStatus.pause) {
-      int activeTriangleIndex =
-          currentState.listTriangle.indexWhere((val) => val.isActive == true);
+      int activeTriangleIndex = currentState.listTriangle.indexWhere(
+        (val) => val.isActive == true,
+      );
       if (activeTriangleIndex == -1) {
         return;
       }

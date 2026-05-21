@@ -14,10 +14,10 @@ class DialogListener<T extends GameProvider> extends StatefulWidget {
   final GameCategoryType gameCategoryType;
 
   const DialogListener({
-    Key? key,
+    super.key,
     required this.child,
     required this.gameCategoryType,
-  }) : super(key: key);
+  });
 
   @override
   State<DialogListener<T>> createState() => _DialogListenerState<T>();
@@ -59,19 +59,20 @@ class _DialogListenerState<T extends GameProvider>
       case DialogType.info:
         showModalBottomSheet(
           context: context,
-          builder: (context) => CommonInfoDialogView(
-            gameCategoryType: widget.gameCategoryType,
-          ),
+          builder: (context) =>
+              CommonInfoDialogView(gameCategoryType: widget.gameCategoryType),
           backgroundColor: Theme.of(context).colorScheme.infoDialogBgColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(24), topRight: Radius.circular(24)),
+              topLeft: Radius.circular(24),
+              topRight: Radius.circular(24),
+            ),
           ),
           isDismissible: false,
           enableDrag: false,
           isScrollControlled: true,
         ).then((value) {
-            context.read<T>().gotItFromInfoDialog();
+          context.read<T>().gotItFromInfoDialog();
         });
         break;
       case DialogType.pause:

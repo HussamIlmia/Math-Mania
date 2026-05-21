@@ -11,7 +11,8 @@ class PicturePuzzleAnswerButton extends StatelessWidget {
   final PicturePuzzleShape picturePuzzleShape;
   final Tuple2<Color, Color> colorTuple;
 
-  PicturePuzzleAnswerButton({
+  const PicturePuzzleAnswerButton({
+    super.key,
     required this.picturePuzzleShape,
     required this.colorTuple,
   });
@@ -33,11 +34,11 @@ class PicturePuzzleAnswerButton extends StatelessWidget {
           builder: (context, value, child) => Text(
             value == "" ? "?" : value,
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  fontSize: 24,
-                  color: value == ""
-                      ? Theme.of(context).colorScheme.crossLightColor
-                      : colorTuple.item1,
-                ),
+              fontSize: 24,
+              color: value == ""
+                  ? Theme.of(context).colorScheme.crossLightColor
+                  : colorTuple.item1,
+            ),
           ),
         ),
       ),

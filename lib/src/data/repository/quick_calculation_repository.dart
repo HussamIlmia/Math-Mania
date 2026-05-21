@@ -4,15 +4,19 @@ import '/src/utility/math_util.dart';
 class QuickCalculationRepository {
   static List<int> listHasCode = <int>[];
 
-  static getQuickCalculationDataList(int level, int noItem) {
+  static List<QuickCalculation> getQuickCalculationDataList(
+    int level,
+    int noItem,
+  ) {
     if (level == 1) {
       listHasCode.clear();
     }
     List<QuickCalculation> list = <QuickCalculation>[];
 
     while (list.length < noItem) {
-      MathUtil.generate(level, noItem - list.length)
-          .forEach((Expression expression) {
+      MathUtil.generate(level, noItem - list.length).forEach((
+        Expression expression,
+      ) {
         QuickCalculation quickCalculationQandS;
         if (expression.operator2 == null) {
           quickCalculationQandS = QuickCalculation(

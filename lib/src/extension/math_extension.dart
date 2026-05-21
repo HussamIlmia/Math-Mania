@@ -15,23 +15,37 @@ extension MathExtension on double {
   }
 
   double toElevation(
-      double maxExtent, double minExtent, double after, double elevation) {
-    if (this < after)
+    double maxExtent,
+    double minExtent,
+    double after,
+    double elevation,
+  ) {
+    if (this < after) {
       return 0;
-    else
+    } else {
       return elevation * (this - after).toReverseRange(maxExtent, minExtent);
+    }
   }
 
   double toRadius(
-      double maxExtent, double minExtent, double after, double radius) {
-    if (this < after)
+    double maxExtent,
+    double minExtent,
+    double after,
+    double radius,
+  ) {
+    if (this < after) {
       return 0;
-    else
+    } else {
       return radius * (this - after).toReverseRange(maxExtent, minExtent);
+    }
   }
 
   double toTextSize(
-      double maxExtent, double minExtent, double from, double to) {
-    return this.toRange(maxExtent, minExtent).remap(0, 1, from, to);
+    double maxExtent,
+    double minExtent,
+    double from,
+    double to,
+  ) {
+    return toRange(maxExtent, minExtent).remap(0, 1, from, to);
   }
 }

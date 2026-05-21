@@ -8,12 +8,12 @@ class CommonLinearPercentIndicator<T extends GameProvider>
   final LinearGradient linearGradient;
   final Color backgroundColor;
 
-  CommonLinearPercentIndicator({
+  const CommonLinearPercentIndicator({
     this.lineHeight = 5.0,
     required this.linearGradient,
     this.backgroundColor = Colors.black12,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +28,7 @@ class CommonLinearPercentIndicator<T extends GameProvider>
             transform: Matrix4.diagonal3Values(model.animation.value, 1.0, 1.0),
             child: Container(
               width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: linearGradient,
-              ),
+              decoration: BoxDecoration(gradient: linearGradient),
             ),
           ),
         );

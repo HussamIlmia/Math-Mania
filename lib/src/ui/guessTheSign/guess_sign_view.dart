@@ -16,10 +16,7 @@ import '/src/ui/common/vsync_provider.dart';
 class GuessSignView extends StatelessWidget {
   final Tuple2<Color, Color> colorTuple;
 
-  const GuessSignView({
-    Key? key,
-    required this.colorTuple,
-  }) : super(key: key);
+  const GuessSignView({super.key, required this.colorTuple});
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +24,11 @@ class GuessSignView extends StatelessWidget {
       providers: [
         const VsyncProvider(),
         ChangeNotifierProvider<GuessSignProvider>(
-            create: (context) => GuessSignProvider(
-                  vsync: VsyncProvider.of(context),
-                  difficultyType: context.read<ThemeProvider>().difficultyType,
-                ))
+          create: (context) => GuessSignProvider(
+            vsync: VsyncProvider.of(context),
+            difficultyType: context.read<ThemeProvider>().difficultyType,
+          ),
+        ),
       ],
       child: PopScope(
         canPop: false,
@@ -46,22 +44,23 @@ class GuessSignView extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     CommonInfoTextView<GuessSignProvider>(
-                        gameCategoryType: GameCategoryType.GUESS_SIGN),
+                      gameCategoryType: GameCategoryType.GUESS_SIGN,
+                    ),
                     Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Selector<GuessSignProvider, Sign>(
-                              selector: (p0, p1) => p1.currentState,
-                              builder: (context, calculatorProvider, child) {
-                                return Text(
-                                  calculatorProvider.firstDigit,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(fontSize: 30),
-                                );
-                              }),
+                            selector: (p0, p1) => p1.currentState,
+                            builder: (context, calculatorProvider, child) {
+                              return Text(
+                                calculatorProvider.firstDigit,
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.titleSmall!.copyWith(fontSize: 30),
+                              );
+                            },
+                          ),
                           SizedBox(width: 14),
                           Selector<GuessSignProvider, Tuple2<double, double>>(
                             selector: (p0, p1) =>
@@ -83,8 +82,9 @@ class GuessSignView extends StatelessWidget {
                                         .textTheme
                                         .titleSmall!
                                         .copyWith(
-                                            fontSize: 30,
-                                            color: colorTuple.item1),
+                                          fontSize: 30,
+                                          color: colorTuple.item1,
+                                        ),
                                   );
                                 },
                               ),
@@ -92,69 +92,65 @@ class GuessSignView extends StatelessWidget {
                           ),
                           SizedBox(width: 14),
                           Selector<GuessSignProvider, Sign>(
-                              selector: (p0, p1) => p1.currentState,
-                              builder: (context, calculatorProvider, child) {
-                                return Text(
-                                  calculatorProvider.secondDigit,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(fontSize: 30),
-                                );
-                              }),
+                            selector: (p0, p1) => p1.currentState,
+                            builder: (context, calculatorProvider, child) {
+                              return Text(
+                                calculatorProvider.secondDigit,
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.titleSmall!.copyWith(fontSize: 30),
+                              );
+                            },
+                          ),
                           SizedBox(width: 6),
                           Text(
                             "=",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall!
-                                .copyWith(fontSize: 30),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.titleSmall!.copyWith(fontSize: 30),
                           ),
                           SizedBox(width: 6),
                           Selector<GuessSignProvider, Sign>(
-                              selector: (p0, p1) => p1.currentState,
-                              builder: (context, calculatorProvider, child) {
-                                return Text(
-                                  calculatorProvider.answer,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(fontSize: 30),
-                                );
-                              }),
+                            selector: (p0, p1) => p1.currentState,
+                            builder: (context, calculatorProvider, child) {
+                              return Text(
+                                calculatorProvider.answer,
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.titleSmall!.copyWith(fontSize: 30),
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
-                    Builder(builder: (context) {
-                      return GridView(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2),
-                        padding: const EdgeInsets.only(bottom: 24),
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          ...[
-                            "/",
-                            "*",
-                            "+",
-                            "-",
-                          ].map(
-                            (e) {
+                    Builder(
+                      builder: (context) {
+                        return GridView(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                              ),
+                          padding: const EdgeInsets.only(bottom: 24),
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          children: [
+                            ...["/", "*", "+", "-"].map((e) {
                               return CommonNumberButton(
                                 text: e,
                                 onTab: () {
-                                  context
-                                      .read<GuessSignProvider>()
-                                      .checkResult(e);
+                                  context.read<GuessSignProvider>().checkResult(
+                                    e,
+                                  );
                                 },
                                 colorTuple: colorTuple,
                                 fontSize: 48,
                               );
-                            },
-                          )
-                        ],
-                      );
-                    }),
+                            }),
+                          ],
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),

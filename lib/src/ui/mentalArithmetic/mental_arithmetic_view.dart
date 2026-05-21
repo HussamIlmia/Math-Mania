@@ -19,10 +19,7 @@ import '/src/ui/common/vsync_provider.dart';
 class MentalArithmeticView extends StatelessWidget {
   final Tuple2<Color, Color> colorTuple;
 
-  const MentalArithmeticView({
-    Key? key,
-    required this.colorTuple,
-  }) : super(key: key);
+  const MentalArithmeticView({super.key, required this.colorTuple});
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +27,18 @@ class MentalArithmeticView extends StatelessWidget {
       providers: [
         const VsyncProvider(),
         ChangeNotifierProvider<MentalArithmeticProvider>(
-            create: (context) => MentalArithmeticProvider(
-                  vsync: VsyncProvider.of(context),
-                  difficultyType: context.read<ThemeProvider>().difficultyType,
-                ))
+          create: (context) => MentalArithmeticProvider(
+            vsync: VsyncProvider.of(context),
+            difficultyType: context.read<ThemeProvider>().difficultyType,
+          ),
+        ),
       ],
       child: PopScope(
         canPop: false,
         child: Scaffold(
-          appBar:
-              CommonAppBar<MentalArithmeticProvider>(colorTuple: colorTuple),
+          appBar: CommonAppBar<MentalArithmeticProvider>(
+            colorTuple: colorTuple,
+          ),
           body: SafeArea(
             bottom: true,
             child: DialogListener<MentalArithmeticProvider>(
@@ -50,17 +49,19 @@ class MentalArithmeticView extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     CommonInfoTextView<MentalArithmeticProvider>(
-                        gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC),
+                      gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC,
+                    ),
                     Expanded(
                       flex: 2,
                       child:
                           Selector<MentalArithmeticProvider, MentalArithmetic>(
-                              selector: (p0, p1) => p1.currentState,
-                              builder: (context, currentState, child) {
-                                return MentalArithmeticQuestionView(
-                                  currentState: currentState,
-                                );
-                              }),
+                            selector: (p0, p1) => p1.currentState,
+                            builder: (context, currentState, child) {
+                              return MentalArithmeticQuestionView(
+                                currentState: currentState,
+                              );
+                            },
+                          ),
                     ),
                     Selector<MentalArithmeticProvider, Tuple2<double, double>>(
                       selector: (p0, p1) =>
@@ -77,12 +78,14 @@ class MentalArithmeticView extends StatelessWidget {
                         child: Selector<MentalArithmeticProvider, String>(
                           selector: (p0, p1) => p1.result,
                           builder: (context, result, child) {
-                            return Text(result,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall!
-                                    .copyWith(
-                                        fontSize: 24, color: colorTuple.item1));
+                            return Text(
+                              result,
+                              style: Theme.of(context).textTheme.titleSmall!
+                                  .copyWith(
+                                    fontSize: 24,
+                                    color: colorTuple.item1,
+                                  ),
+                            );
                           },
                         ),
                       ),
@@ -90,48 +93,52 @@ class MentalArithmeticView extends StatelessWidget {
                     SizedBox(height: 24),
                     Expanded(
                       flex: 8,
-                      child: LayoutBuilder(builder: (context, constraints) {
-                        return GridView(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            childAspectRatio: (constraints.maxWidth / 3) /
-                                ((constraints.maxHeight - 24) / 4),
-                          ),
-                          padding: const EdgeInsets.only(bottom: 24),
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          children: [
-                            ...[
-                              "7",
-                              "8",
-                              "9",
-                              "4",
-                              "5",
-                              "6",
-                              "1",
-                              "2",
-                              "3",
-                              "-",
-                              "0",
-                              "Back"
-                            ].map(
-                              (e) {
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return GridView(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  childAspectRatio:
+                                      (constraints.maxWidth / 3) /
+                                      ((constraints.maxHeight - 24) / 4),
+                                ),
+                            padding: const EdgeInsets.only(bottom: 24),
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            children: [
+                              ...[
+                                "7",
+                                "8",
+                                "9",
+                                "4",
+                                "5",
+                                "6",
+                                "1",
+                                "2",
+                                "3",
+                                "-",
+                                "0",
+                                "Back",
+                              ].map((e) {
                                 if (e == "Back") {
-                                  return CommonBackButton(onTab: () {
-                                    context
-                                        .read<MentalArithmeticProvider>()
-                                        .backPress();
-                                  });
+                                  return CommonBackButton(
+                                    onTab: () {
+                                      context
+                                          .read<MentalArithmeticProvider>()
+                                          .backPress();
+                                    },
+                                  );
                                 } else if (e == "-") {
                                   return CommonClearButton(
-                                      text: e,
-                                      fontSize: 40,
-                                      onTab: () {
-                                        context
-                                            .read<MentalArithmeticProvider>()
-                                            .checkResult(e);
-                                      });
+                                    text: e,
+                                    fontSize: 40,
+                                    onTab: () {
+                                      context
+                                          .read<MentalArithmeticProvider>()
+                                          .checkResult(e);
+                                    },
+                                  );
                                 } else {
                                   return CommonNumberButton(
                                     text: e,
@@ -143,11 +150,11 @@ class MentalArithmeticView extends StatelessWidget {
                                     colorTuple: colorTuple,
                                   );
                                 }
-                              },
-                            )
-                          ],
-                        );
-                      }),
+                              }),
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),

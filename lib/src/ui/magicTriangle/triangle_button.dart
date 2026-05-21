@@ -10,11 +10,11 @@ class TriangleButton extends StatelessWidget {
   final Tuple2<Color, Color> colorTuple;
 
   const TriangleButton({
-    Key? key,
+    super.key,
     required this.colorTuple,
     required this.digit,
     required this.index,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,7 @@ class TriangleButton extends StatelessWidget {
       maintainAnimation: true,
       maintainState: true,
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         elevation: 2,
         child: InkWell(
           onTap: () {
@@ -43,10 +41,10 @@ class TriangleButton extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               digit.value,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(fontSize: 24, color: colorTuple.item1),
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                fontSize: 24,
+                color: colorTuple.item1,
+              ),
             ),
           ),
         ),

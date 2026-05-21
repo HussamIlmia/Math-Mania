@@ -11,10 +11,7 @@ class MyApp extends StatelessWidget {
   final String fontFamily = "Montserrat";
   final FirebaseAnalytics? firebaseAnalytics;
 
-  const MyApp({
-    required this.firebaseAnalytics,
-    Key? key,
-  }) : super(key: key);
+  const MyApp({required this.firebaseAnalytics, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,21 +21,22 @@ class MyApp extends StatelessWidget {
     ]);
 
     return Consumer<ThemeProvider>(
-        builder: (context, ThemeProvider provider, child) {
-      return MaterialApp(
-        title: 'Math Mania',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.theme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: provider.themeMode,
-        initialRoute: KeyUtil.splash,
-        routes: appRoutes,
-        // home: DashboardView(),
-        navigatorObservers: [
-          if (firebaseAnalytics != null)
-            FirebaseAnalyticsObserver(analytics: firebaseAnalytics!)
-        ],
-      );
-    });
+      builder: (context, ThemeProvider provider, child) {
+        return MaterialApp(
+          title: 'Math Mania',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.theme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: provider.themeMode,
+          initialRoute: KeyUtil.splash,
+          routes: appRoutes,
+          // home: DashboardView(),
+          navigatorObservers: [
+            if (firebaseAnalytics != null)
+              FirebaseAnalyticsObserver(analytics: firebaseAnalytics!),
+          ],
+        );
+      },
+    );
   }
 }

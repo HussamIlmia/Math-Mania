@@ -16,10 +16,7 @@ import '/src/ui/common/vsync_provider.dart';
 class SquareRootView extends StatelessWidget {
   final Tuple2<Color, Color> colorTuple;
 
-  const SquareRootView({
-    Key? key,
-    required this.colorTuple,
-  }) : super(key: key);
+  const SquareRootView({super.key, required this.colorTuple});
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +24,11 @@ class SquareRootView extends StatelessWidget {
       providers: [
         const VsyncProvider(),
         ChangeNotifierProvider<SquareRootProvider>(
-            create: (context) => SquareRootProvider(
-                  vsync: VsyncProvider.of(context),
-                  difficultyType: context.read<ThemeProvider>().difficultyType,
-                ))
+          create: (context) => SquareRootProvider(
+            vsync: VsyncProvider.of(context),
+            difficultyType: context.read<ThemeProvider>().difficultyType,
+          ),
+        ),
       ],
       child: PopScope(
         canPop: false,
@@ -46,7 +44,8 @@ class SquareRootView extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     CommonInfoTextView<SquareRootProvider>(
-                        gameCategoryType: GameCategoryType.SQUARE_ROOT),
+                      gameCategoryType: GameCategoryType.SQUARE_ROOT,
+                    ),
                     Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -60,16 +59,16 @@ class SquareRootView extends StatelessWidget {
                             ),
                           ),
                           Selector<SquareRootProvider, SquareRoot>(
-                              selector: (p0, p1) => p1.currentState,
-                              builder: (context, currentState, child) {
-                                return Text(
-                                  currentState.question,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(fontSize: 40),
-                                );
-                              }),
+                            selector: (p0, p1) => p1.currentState,
+                            builder: (context, currentState, child) {
+                              return Text(
+                                currentState.question,
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.titleSmall!.copyWith(fontSize: 40),
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -79,7 +78,8 @@ class SquareRootView extends StatelessWidget {
                         return GridView(
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2),
+                                crossAxisCount: 2,
+                              ),
                           padding: const EdgeInsets.only(bottom: 24),
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
@@ -89,20 +89,18 @@ class SquareRootView extends StatelessWidget {
                               currentState.secondAns,
                               currentState.thirdAns,
                               currentState.fourthAns,
-                            ].map(
-                              (e) {
-                                return CommonNumberButton(
-                                  text: e,
-                                  onTab: () {
-                                    context
-                                        .read<SquareRootProvider>()
-                                        .checkResult(e);
-                                  },
-                                  colorTuple: colorTuple,
-                                  fontSize: 48,
-                                );
-                              },
-                            )
+                            ].map((e) {
+                              return CommonNumberButton(
+                                text: e,
+                                onTab: () {
+                                  context
+                                      .read<SquareRootProvider>()
+                                      .checkResult(e);
+                                },
+                                colorTuple: colorTuple,
+                                fontSize: 48,
+                              );
+                            }),
                           ],
                         );
                       },

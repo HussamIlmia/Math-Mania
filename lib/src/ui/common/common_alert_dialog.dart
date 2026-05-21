@@ -4,7 +4,7 @@ import '/src/core/color_scheme.dart';
 class CommonAlertDialog extends AlertDialog {
   final Widget child;
 
-  CommonAlertDialog({required this.child}) : super();
+  const CommonAlertDialog({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {

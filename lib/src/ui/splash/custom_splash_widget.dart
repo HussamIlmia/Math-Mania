@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 class AnimatedGridItemView extends StatefulWidget {
   final int duration;
 
-  const AnimatedGridItemView({
-    Key? key,
-    required this.duration,
-  }) : super(key: key);
+  const AnimatedGridItemView({super.key, required this.duration});
 
   @override
   State<AnimatedGridItemView> createState() => _AnimatedGridItemViewState();
@@ -31,36 +28,37 @@ class _AnimatedGridItemViewState extends State<AnimatedGridItemView>
       vsync: this,
     );
 
-    _rotateAnimationIn = TweenSequence(
-      <TweenSequenceItem<double>>[
-        TweenSequenceItem<double>(
-          tween: Tween(begin: 0.0, end: pi / 2)
-              .chain(CurveTween(curve: Curves.linear)),
-          weight: 50.0,
-        ),
-        TweenSequenceItem<double>(
-          tween: ConstantTween<double>(pi / 2),
-          weight: 50.0,
-        ),
-      ],
-    ).animate(_controller);
+    _rotateAnimationIn = TweenSequence(<TweenSequenceItem<double>>[
+      TweenSequenceItem<double>(
+        tween: Tween(
+          begin: 0.0,
+          end: pi / 2,
+        ).chain(CurveTween(curve: Curves.linear)),
+        weight: 50.0,
+      ),
+      TweenSequenceItem<double>(
+        tween: ConstantTween<double>(pi / 2),
+        weight: 50.0,
+      ),
+    ]).animate(_controller);
 
-    _rotateAnimationOut = TweenSequence(
-      <TweenSequenceItem<double>>[
-        TweenSequenceItem<double>(
-          tween: ConstantTween<double>(pi / 2),
-          weight: 50.0,
-        ),
-        TweenSequenceItem<double>(
-          tween: Tween(begin: -pi / 2, end: 0.0)
-              .chain(CurveTween(curve: Curves.linear)),
-          weight: 50.0,
-        ),
-      ],
-    ).animate(_controller);
+    _rotateAnimationOut = TweenSequence(<TweenSequenceItem<double>>[
+      TweenSequenceItem<double>(
+        tween: ConstantTween<double>(pi / 2),
+        weight: 50.0,
+      ),
+      TweenSequenceItem<double>(
+        tween: Tween(
+          begin: -pi / 2,
+          end: 0.0,
+        ).chain(CurveTween(curve: Curves.linear)),
+        weight: 50.0,
+      ),
+    ]).animate(_controller);
 
-    Future.delayed(Duration(milliseconds: widget.duration))
-        .then((value) => _controller.forward());
+    Future.delayed(
+      Duration(milliseconds: widget.duration),
+    ).then((value) => _controller.forward());
   }
 
   @override
@@ -69,55 +67,57 @@ class _AnimatedGridItemViewState extends State<AnimatedGridItemView>
       alignment: Alignment.center,
       children: [
         AnimatedBuilder(
-            animation: _rotateAnimationIn,
-            child: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.05),
-                border: Border.all(color: Colors.white24, width: 1),
-              ),
-              child: Text(
-                randomNumber[0],
-                style: TextStyle(
-                  color: Colors.white24.withValues(alpha: 0.25),
-                  fontFamily: "Poppins",
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
+          animation: _rotateAnimationIn,
+          child: Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.black.withValues(alpha: 0.05),
+              border: Border.all(color: Colors.white24, width: 1),
+            ),
+            child: Text(
+              randomNumber[0],
+              style: TextStyle(
+                color: Colors.white24.withValues(alpha: 0.25),
+                fontFamily: "Poppins",
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
               ),
             ),
-            builder: (context, child) {
-              return Transform(
-                transform: Matrix4.rotationY(_rotateAnimationIn.value),
-                alignment: Alignment.center,
-                child: child,
-              );
-            }),
+          ),
+          builder: (context, child) {
+            return Transform(
+              transform: Matrix4.rotationY(_rotateAnimationIn.value),
+              alignment: Alignment.center,
+              child: child,
+            );
+          },
+        ),
         AnimatedBuilder(
-            animation: _rotateAnimationOut,
-            child: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.05),
-                border: Border.all(color: Colors.white24, width: 1),
-              ),
-              child: Text(
-                randomNumber[1],
-                style: TextStyle(
-                  color: Colors.white24.withValues(alpha: 0.25),
-                  fontFamily: "Poppins",
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
+          animation: _rotateAnimationOut,
+          child: Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.black.withValues(alpha: 0.05),
+              border: Border.all(color: Colors.white24, width: 1),
+            ),
+            child: Text(
+              randomNumber[1],
+              style: TextStyle(
+                color: Colors.white24.withValues(alpha: 0.25),
+                fontFamily: "Poppins",
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
               ),
             ),
-            builder: (context, child) {
-              return Transform(
-                transform: Matrix4.rotationY(_rotateAnimationOut.value),
-                alignment: Alignment.center,
-                child: child,
-              );
-            }),
+          ),
+          builder: (context, child) {
+            return Transform(
+              transform: Matrix4.rotationY(_rotateAnimationOut.value),
+              alignment: Alignment.center,
+              child: child,
+            );
+          },
+        ),
       ],
     );
   }

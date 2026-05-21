@@ -11,13 +11,14 @@ class CommonGamePauseDialogView extends StatelessWidget {
   const CommonGamePauseDialogView({
     required this.gameCategoryType,
     required this.score,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    GameInfoDialog gameInfoDialog =
-        DialogInfoUtil.getInfoDialogData(gameCategoryType);
+    GameInfoDialog gameInfoDialog = DialogInfoUtil.getInfoDialogData(
+      gameCategoryType,
+    );
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -28,17 +29,17 @@ class CommonGamePauseDialogView extends StatelessWidget {
               padding: const EdgeInsets.only(left: 4),
               child: Text(
                 gameInfoDialog.title,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(fontSize: 18),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge!.copyWith(fontSize: 18),
               ),
             ),
             Card(
               elevation: 0,
               color: Theme.of(context).colorScheme.iconCardBgColor,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(16))),
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+              ),
               child: InkWell(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
                 onTap: () {
@@ -54,7 +55,7 @@ class CommonGamePauseDialogView extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
         SizedBox(height: 24),
@@ -79,20 +80,21 @@ class CommonGamePauseDialogView extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Container(
-                        height: 44,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color(0xffF48C06), Color(0xffD00000)],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
+                      height: 44,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Color(0xffF48C06), Color(0xffD00000)],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
                         ),
-                        child: Text("RESUME",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(fontSize: 18, color: Colors.white))),
+                      ),
+                      child: Text(
+                        "RESUME",
+                        style: Theme.of(context).textTheme.titleMedium!
+                            .copyWith(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -121,16 +123,13 @@ class CommonGamePauseDialogView extends StatelessWidget {
                         end: Alignment.bottomCenter,
                       ),
                     ),
-                    child: Icon(
-                      Icons.refresh,
-                      color: Colors.white,
-                    ),
+                    child: Icon(Icons.refresh, color: Colors.white),
                   ),
                 ),
               ),
             ),
           ],
-        )
+        ),
       ],
     );
   }

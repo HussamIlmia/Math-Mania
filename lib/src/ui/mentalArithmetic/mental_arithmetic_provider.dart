@@ -1,29 +1,27 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import '/src/data/models/mental_arithmetic.dart';
 import '/src/core/app_constant.dart';
 import '/src/ui/app/game_provider.dart';
 
 class MentalArithmeticProvider extends GameProvider<MentalArithmetic> {
+  @override
   late String result;
+  @override
   final DifficultyType difficultyType;
 
-  MentalArithmeticProvider({
-    required TickerProvider vsync,
-    required this.difficultyType,
-  }) : super(
-          vsync: vsync,
-          gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC,
-          difficultyType: difficultyType,
-        ) {
+  MentalArithmeticProvider({required super.vsync, required this.difficultyType})
+    : super(
+        gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC,
+        difficultyType: difficultyType,
+      ) {
     startGame();
   }
 
   Future<void> checkResult(String answer) async {
     if (timerStatus != TimerStatus.pause &&
         result.length < currentState.answer.toString().length &&
-        ((result.length == 0 && answer == "-") || (answer != "-"))) {
+        ((result.isEmpty && answer == "-") || (answer != "-"))) {
       result = result + answer;
       notifyListeners();
       if (result != "-" && int.parse(result) == currentState.answer) {
@@ -39,7 +37,7 @@ class MentalArithmeticProvider extends GameProvider<MentalArithmetic> {
   }
 
   void backPress() {
-    if (result.length > 0) {
+    if (result.isNotEmpty) {
       result = result.substring(0, result.length - 1);
       notifyListeners();
     }

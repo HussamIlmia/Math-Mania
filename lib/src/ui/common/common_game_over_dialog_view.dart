@@ -8,8 +8,8 @@ class CommonGameOverDialogView extends StatelessWidget {
   const CommonGameOverDialogView({
     required this.gameCategoryType,
     required this.score,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,20 +44,21 @@ class CommonGameOverDialogView extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Container(
-                        height: 44,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color(0xffF48C06), Color(0xffD00000)],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
+                      height: 44,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Color(0xffF48C06), Color(0xffD00000)],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
                         ),
-                        child: Text("RESTART",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(fontSize: 18, color: Colors.white))),
+                      ),
+                      child: Text(
+                        "RESTART",
+                        style: Theme.of(context).textTheme.titleMedium!
+                            .copyWith(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -86,10 +87,7 @@ class CommonGameOverDialogView extends StatelessWidget {
                         end: Alignment.bottomCenter,
                       ),
                     ),
-                    child: Icon(
-                      Icons.clear,
-                      color: Colors.white,
-                    ),
+                    child: Icon(Icons.clear, color: Colors.white),
                   ),
                 ),
               ),

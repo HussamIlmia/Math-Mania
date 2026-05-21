@@ -18,6 +18,8 @@ import 'package:provider/provider.dart';
 import '/src/utility/tuple.dart';
 
 class DashboardView extends StatefulWidget {
+  const DashboardView({super.key});
+
   @override
   _DashboardViewState createState() => _DashboardViewState();
 }
@@ -83,8 +85,9 @@ class _DashboardViewState extends State<DashboardView>
                         SizedBox(width: 12),
                         Container(
                           decoration: BoxDecoration(
-                            color:
-                                Theme.of(context).colorScheme.infoDialogBgColor,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.infoDialogBgColor,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           padding: const EdgeInsets.all(12.0),
@@ -98,10 +101,11 @@ class _DashboardViewState extends State<DashboardView>
                               SizedBox(width: 5),
                               Consumer<DashboardProvider>(
                                 builder: (context, model, child) => Text(
-                                    model.overallScore.toString(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium),
+                                  model.overallScore.toString(),
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.titleMedium,
+                                ),
                               ),
                             ],
                           ),
@@ -123,23 +127,24 @@ class _DashboardViewState extends State<DashboardView>
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .infoDialogBgColor,
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.infoDialogBgColor,
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               padding: const EdgeInsets.all(12.0),
                               child: RepaintBoundary(
-                                child: Image.asset(
-                                  AppAssets.icAppMathRiddle,
-                                  width: 24,
-                                  height: 24,
-                                )
-                                    .animate(
-                                      onPlay: (controller) =>
-                                          controller.repeat(reverse: true),
-                                    )
-                                    .scaleXY(begin: 1.5, end: 0.8),
+                                child:
+                                    Image.asset(
+                                          AppAssets.icAppMathRiddle,
+                                          width: 24,
+                                          height: 24,
+                                        )
+                                        .animate(
+                                          onPlay: (controller) =>
+                                              controller.repeat(reverse: true),
+                                        )
+                                        .scaleXY(begin: 1.5, end: 0.8),
                               ),
                             ),
                           ),
@@ -151,8 +156,10 @@ class _DashboardViewState extends State<DashboardView>
                         showDialog<bool>(
                           context: context,
                           builder: (newContext) {
-                            final model = Provider.of<ThemeProvider>(context,
-                                listen: true);
+                            final model = Provider.of<ThemeProvider>(
+                              context,
+                              listen: true,
+                            );
                             return CommonAlertDialog(
                               child: ChangeNotifierProvider.value(
                                 value: model,
@@ -171,15 +178,20 @@ class _DashboardViewState extends State<DashboardView>
                       ),
                       child: Container(
                         decoration: BoxDecoration(
-                          color:
-                              Theme.of(context).colorScheme.infoDialogBgColor,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.infoDialogBgColor,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(12),
                             bottomLeft: Radius.circular(12),
                           ),
                         ),
                         padding: const EdgeInsets.only(
-                            left: 12, top: 12, bottom: 12, right: 8),
+                          left: 12,
+                          top: 12,
+                          bottom: 12,
+                          right: 8,
+                        ),
                         child: SvgPicture.asset(
                           Theme.of(context).brightness == Brightness.light
                               ? AppAssets.ic3dStairsDark
@@ -199,15 +211,20 @@ class _DashboardViewState extends State<DashboardView>
                       ),
                       child: Container(
                         decoration: BoxDecoration(
-                          color:
-                              Theme.of(context).colorScheme.infoDialogBgColor,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.infoDialogBgColor,
                           borderRadius: BorderRadius.only(
                             topRight: Radius.circular(12),
                             bottomRight: Radius.circular(12),
                           ),
                         ),
                         padding: const EdgeInsets.only(
-                            right: 12, top: 12, bottom: 12, left: 8),
+                          right: 12,
+                          top: 12,
+                          bottom: 12,
+                          left: 8,
+                        ),
                         child: SvgPicture.asset(
                           Theme.of(context).brightness == Brightness.light
                               ? AppAssets.icDarkMode
@@ -230,19 +247,18 @@ class _DashboardViewState extends State<DashboardView>
                         SizedBox(height: 36),
                         Text(
                           "Math Mania",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall!
+                          style: Theme.of(context).textTheme.titleSmall!
                               .copyWith(
-                                  fontSize: 28, fontWeight: FontWeight.bold),
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                              ),
                         ),
                         SizedBox(height: 12),
                         Text(
                           "Train Your Brain, Improve Your Math Skill",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(fontSize: 14),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodySmall!.copyWith(fontSize: 14),
                         ),
                         SizedBox(height: 36),
                         DashboardButtonView(
@@ -253,8 +269,10 @@ class _DashboardViewState extends State<DashboardView>
                               context,
                               KeyUtil.home,
                               ModalRoute.withName(KeyUtil.dashboard),
-                              arguments: Tuple2(KeyUtil.dashboardItems[0],
-                                  MediaQuery.of(context).padding.top),
+                              arguments: Tuple2(
+                                KeyUtil.dashboardItems[0],
+                                MediaQuery.of(context).padding.top,
+                              ),
                             );
                           },
                         ),
@@ -267,8 +285,10 @@ class _DashboardViewState extends State<DashboardView>
                               context,
                               KeyUtil.home,
                               ModalRoute.withName(KeyUtil.dashboard),
-                              arguments: Tuple2(KeyUtil.dashboardItems[1],
-                                  MediaQuery.of(context).padding.top),
+                              arguments: Tuple2(
+                                KeyUtil.dashboardItems[1],
+                                MediaQuery.of(context).padding.top,
+                              ),
                             );
                           },
                         ),
@@ -281,8 +301,10 @@ class _DashboardViewState extends State<DashboardView>
                               context,
                               KeyUtil.home,
                               ModalRoute.withName(KeyUtil.dashboard),
-                              arguments: Tuple2(KeyUtil.dashboardItems[2],
-                                  MediaQuery.of(context).padding.top),
+                              arguments: Tuple2(
+                                KeyUtil.dashboardItems[2],
+                                MediaQuery.of(context).padding.top,
+                              ),
                             );
                           },
                         ),
@@ -293,8 +315,9 @@ class _DashboardViewState extends State<DashboardView>
                 SizedBox(height: 24),
                 Container(
                   decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.infoDialogBgColor,
-                      borderRadius: BorderRadius.circular(18)),
+                    color: Theme.of(context).colorScheme.infoDialogBgColor,
+                    borderRadius: BorderRadius.circular(18),
+                  ),
                   padding: const EdgeInsets.all(12.0),
                   margin: const EdgeInsets.symmetric(horizontal: 12),
                   child: Row(
@@ -302,21 +325,21 @@ class _DashboardViewState extends State<DashboardView>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
-                        child: Text("Math Mania by Pabitra Banerjee",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(fontWeight: FontWeight.normal)),
+                        child: Text(
+                          "Math Mania by Pabitra Banerjee",
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(fontWeight: FontWeight.normal),
+                        ),
                       ),
                       SizedBox(width: 12),
                       FutureBuilder<PackageInfo>(
                         future: PackageInfo.fromPlatform(),
                         builder: (context, snapshot) => Text(
-                            "v${snapshot.data?.version}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .copyWith(fontSize: 14)),
+                          "v${snapshot.data?.version}",
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodySmall!.copyWith(fontSize: 14),
+                        ),
                       ),
                     ],
                   ),

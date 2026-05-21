@@ -12,7 +12,8 @@ class PyramidNumberButton extends StatelessWidget {
   final double height;
   final Tuple2<Color, Color> colorTuple;
 
-  PyramidNumberButton({
+  const PyramidNumberButton({
+    super.key,
     required this.numPyramidCellModel,
     this.isLeftRadius = false,
     this.isRightRadius = false,
@@ -35,10 +36,10 @@ class PyramidNumberButton extends StatelessWidget {
           color: numPyramidCellModel.isHint
               ? null
               : (numPyramidCellModel.isDone
-                  ? (numPyramidCellModel.isCorrect
-                      ? Colors.transparent
-                      : Colors.redAccent)
-                  : Colors.transparent),
+                    ? (numPyramidCellModel.isCorrect
+                          ? Colors.transparent
+                          : Colors.redAccent)
+                    : Colors.transparent),
           gradient: numPyramidCellModel.isHint
               ? LinearGradient(
                   colors: [colorTuple.item1, colorTuple.item2],
@@ -62,9 +63,8 @@ class PyramidNumberButton extends StatelessWidget {
               ? numPyramidCellModel.text
               : numPyramidCellModel.numberOnCell.toString(),
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              color: numPyramidCellModel.isHint
-                  ?  Colors.white
-                  : colorTuple.item1),
+            color: numPyramidCellModel.isHint ? Colors.white : colorTuple.item1,
+          ),
         ),
       ),
     );

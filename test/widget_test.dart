@@ -5,7 +5,7 @@ import 'package:math_mania/src/ui/app/app.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp(firebaseAnalytics: null,));
+    await tester.pumpWidget(const MyApp(firebaseAnalytics: null));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

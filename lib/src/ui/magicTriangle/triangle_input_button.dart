@@ -10,7 +10,8 @@ class TriangleInputButton extends StatelessWidget {
   final int index;
   final Tuple2<Color, Color> colorTuple;
 
-  TriangleInputButton({
+  const TriangleInputButton({
+    super.key,
     required this.input,
     required this.index,
     required this.colorTuple,
@@ -21,9 +22,10 @@ class TriangleInputButton extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.all(Radius.circular(24)),
       onTap: () {
-        context
-            .read<MagicTriangleProvider>()
-            .inputTriangleSelection(index, input);
+        context.read<MagicTriangleProvider>().inputTriangleSelection(
+          index,
+          input,
+        );
       },
       child: CommonNeumorphicView(
         child: Container(
@@ -41,10 +43,9 @@ class TriangleInputButton extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             input.value.toString(),
-            style: Theme.of(context)
-                .textTheme
-                .titleSmall!
-                .copyWith(fontSize: 30, color: Colors.white),
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall!.copyWith(fontSize: 30, color: Colors.white),
           ),
         ),
       ),

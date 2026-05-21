@@ -6,11 +6,11 @@ class CommonTabAnimationView extends StatefulWidget {
   final bool isDelayed;
 
   const CommonTabAnimationView({
-    Key? key,
+    super.key,
     required this.child,
     required this.onTab,
     this.isDelayed = false,
-  }) : super(key: key);
+  });
 
   @override
   _CommonTabAnimationViewState createState() => _CommonTabAnimationViewState();
@@ -22,16 +22,15 @@ class _CommonTabAnimationViewState extends State<CommonTabAnimationView>
 
   @override
   void initState() {
-    _controller = AnimationController(
-      vsync: this,
-      duration: Duration(
-        milliseconds: 100,
-      ),
-      lowerBound: 0.0,
-      upperBound: 0.1,
-    )..addListener(() {
-        setState(() {});
-      });
+    _controller =
+        AnimationController(
+          vsync: this,
+          duration: Duration(milliseconds: 100),
+          lowerBound: 0.0,
+          upperBound: 0.1,
+        )..addListener(() {
+          setState(() {});
+        });
     super.initState();
   }
 
@@ -48,8 +47,9 @@ class _CommonTabAnimationViewState extends State<CommonTabAnimationView>
       child: GestureDetector(
         onTap: () async {
           _controller.forward().then((value) => _controller.reverse());
-          if (widget.isDelayed)
+          if (widget.isDelayed) {
             await Future.delayed(Duration(milliseconds: 195));
+          }
           widget.onTab();
         },
         child: widget.child,

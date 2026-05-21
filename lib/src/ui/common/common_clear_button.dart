@@ -9,21 +9,19 @@ class CommonClearButton extends StatelessWidget {
   final double fontSize;
 
   const CommonClearButton({
-    Key? key,
+    super.key,
     required this.onTab,
     required this.text,
     this.height = 112,
     this.fontSize = 14,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return CommonTabAnimationView(
       onTab: onTab,
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         color: Theme.of(context).colorScheme.cardBgColor,
         elevation: 2,
         child: ClipRRect(
@@ -35,9 +33,9 @@ class CommonClearButton extends StatelessWidget {
             child: Text(
               text,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    fontSize: fontSize,
-                    color: Theme.of(context).colorScheme.crossColor,
-                  ),
+                fontSize: fontSize,
+                color: Theme.of(context).colorScheme.crossColor,
+              ),
             ),
           ),
         ),

@@ -9,10 +9,7 @@ import 'package:provider/provider.dart';
 class CommonDifficultyView extends StatelessWidget {
   final DifficultyType selectedDifficulty;
 
-  const CommonDifficultyView({
-    required this.selectedDifficulty,
-    Key? key,
-  }) : super(key: key);
+  const CommonDifficultyView({required this.selectedDifficulty, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +23,17 @@ class CommonDifficultyView extends StatelessWidget {
               padding: const EdgeInsets.only(left: 4),
               child: Text(
                 "Change Difficulty",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(fontSize: 18),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge!.copyWith(fontSize: 18),
               ),
             ),
             Card(
               elevation: 0,
               color: Theme.of(context).colorScheme.iconCardBgColor,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(16))),
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+              ),
               child: InkWell(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
                 onTap: () {
@@ -52,7 +49,7 @@ class CommonDifficultyView extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
         SizedBox(height: 24),
@@ -85,16 +82,14 @@ class CommonDifficultyButtonView extends StatelessWidget {
     required this.name,
     required this.difficultyType,
     required this.selectedDifficulty,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         onTap: () {
           context.read<ThemeProvider>().changeDifficulty(difficultyType);
@@ -120,9 +115,9 @@ class CommonDifficultyButtonView extends StatelessWidget {
                   child: Text(
                     name,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          fontSize: 18,
-                          color: Colors.white,
-                        ),
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
                 selectedDifficulty == difficultyType

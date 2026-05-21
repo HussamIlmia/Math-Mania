@@ -5,10 +5,10 @@ class CommonScoreView extends StatefulWidget {
   final int oldScore;
 
   const CommonScoreView({
-    Key? key,
+    super.key,
     required this.currentScore,
     required this.oldScore,
-  }) : super(key: key);
+  });
 
   @override
   State<CommonScoreView> createState() => _CommonScoreViewState();
@@ -31,49 +31,34 @@ class _CommonScoreViewState extends State<CommonScoreView>
     );
 
     inAnimation = Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0))
-        .animate(CurvedAnimation(
-      parent: _controller,
-      curve: Interval(
-        0.0,
-        1.0,
-        curve: Curves.easeIn,
-      ),
-    ));
+        .animate(
+          CurvedAnimation(
+            parent: _controller,
+            curve: Interval(0.0, 1.0, curve: Curves.easeIn),
+          ),
+        );
 
     outAnimation =
-        Tween<Offset>(begin: Offset(0.0, 0.0), end: Offset(0.0, -1.0))
-            .animate(CurvedAnimation(
-      parent: _controller,
-      curve: Interval(
-        0.0,
-        1.0,
-        curve: Curves.easeIn,
-      ),
-    ));
+        Tween<Offset>(begin: Offset(0.0, 0.0), end: Offset(0.0, -1.0)).animate(
+          CurvedAnimation(
+            parent: _controller,
+            curve: Interval(0.0, 1.0, curve: Curves.easeIn),
+          ),
+        );
 
-    _opacityAnimationOut = Tween<double>(
-      begin: 1.0,
-      end: 0.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Interval(
-        0.4,
-        0.8,
-        curve: Curves.easeIn,
+    _opacityAnimationOut = Tween<double>(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(0.4, 0.8, curve: Curves.easeIn),
       ),
-    ));
+    );
 
-    _opacityAnimationIn = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Interval(
-        0.4,
-        0.8,
-        curve: Curves.easeOut,
+    _opacityAnimationIn = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(0.4, 0.8, curve: Curves.easeOut),
       ),
-    ));
+    );
   }
 
   @override
@@ -94,6 +79,7 @@ class _CommonScoreViewState extends State<CommonScoreView>
       alignment: Alignment.center,
       children: [
         SlideTransition(
+          position: inAnimation,
           child: FadeTransition(
             opacity: _opacityAnimationIn,
             child: Text(
@@ -101,13 +87,14 @@ class _CommonScoreViewState extends State<CommonScoreView>
                   ? widget.currentScore.toString()
                   : widget.oldScore.toString(),
               // key: ValueKey<int>(widget.score),
-              style:
-                  Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 24),
+              style: Theme.of(
+                context,
+              ).textTheme.titleSmall!.copyWith(fontSize: 24),
             ),
           ),
-          position: inAnimation,
         ),
         SlideTransition(
+          position: outAnimation,
           child: FadeTransition(
             opacity: _opacityAnimationOut,
             child: Text(
@@ -115,12 +102,12 @@ class _CommonScoreViewState extends State<CommonScoreView>
                   ? widget.currentScore.toString()
                   : widget.oldScore.toString(),
               // key: ValueKey<int>(widget.score),
-              style:
-                  Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 24),
+              style: Theme.of(
+                context,
+              ).textTheme.titleSmall!.copyWith(fontSize: 24),
             ),
           ),
-          position: outAnimation,
-        )
+        ),
       ],
     );
   }

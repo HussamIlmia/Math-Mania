@@ -4,26 +4,28 @@ class MathGrid {
   List<MathGridCellModel> listForSquare;
   late int currentAnswer;
 
-  MathGrid({
-    required this.listForSquare,
-  }) {
+  MathGrid({required this.listForSquare}) {
     currentAnswer = getNewAnswer();
   }
 
   int getNewAnswer() {
-    List<MathGridCellModel> list = listForSquare
-        .where((element) => !element.isRemoved)
-        .toList()
-      ..shuffle();
+    List<MathGridCellModel> list =
+        listForSquare.where((element) => !element.isRemoved).toList()
+          ..shuffle();
     int noOfDigit = 3 + Random().nextInt(4);
     if (noOfDigit > list.length) {
-      return list.map((e) {
-        return e.value;
-      }).fold(0, (previousValue, element) => previousValue + element);
+      return list
+          .map((e) {
+            return e.value;
+          })
+          .fold(0, (previousValue, element) => previousValue + element);
     } else {
-      return list.take(noOfDigit).map((e) {
-        return e.value;
-      }).fold(0, (previousValue, element) => previousValue + element);
+      return list
+          .take(noOfDigit)
+          .map((e) {
+            return e.value;
+          })
+          .fold(0, (previousValue, element) => previousValue + element);
     }
   }
 

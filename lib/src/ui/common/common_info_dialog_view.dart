@@ -7,15 +7,13 @@ import '/src/utility/dialog_info_util.dart';
 class CommonInfoDialogView extends StatelessWidget {
   final GameCategoryType gameCategoryType;
 
-  const CommonInfoDialogView({
-    required this.gameCategoryType,
-    Key? key,
-  }) : super(key: key);
+  const CommonInfoDialogView({required this.gameCategoryType, super.key});
 
   @override
   Widget build(BuildContext context) {
-    GameInfoDialog gameInfoDialog =
-        DialogInfoUtil.getInfoDialogData(gameCategoryType);
+    GameInfoDialog gameInfoDialog = DialogInfoUtil.getInfoDialogData(
+      gameCategoryType,
+    );
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       child: Column(
@@ -23,10 +21,9 @@ class CommonInfoDialogView extends StatelessWidget {
         children: [
           Text(
             gameInfoDialog.title,
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge!
-                .copyWith(fontSize: 18),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge!.copyWith(fontSize: 18),
           ),
           SizedBox(height: 24),
           Container(
@@ -38,10 +35,7 @@ class CommonInfoDialogView extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(24)),
-              child: Image.asset(
-                gameInfoDialog.image,
-                fit: BoxFit.fill,
-              ),
+              child: Image.asset(gameInfoDialog.image, fit: BoxFit.fill),
             ),
           ),
           SizedBox(height: 18),
@@ -50,8 +44,9 @@ class CommonInfoDialogView extends StatelessWidget {
             child: Text(
               gameInfoDialog.dec,
               textAlign: TextAlign.center,
-              style:
-                  Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 16),
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall!.copyWith(fontSize: 16),
             ),
           ),
           SizedBox(height: 18),
@@ -64,19 +59,17 @@ class CommonInfoDialogView extends StatelessWidget {
                   Text(
                     "${gameInfoDialog.correctAnswerScore}",
                     textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall!
-                        .copyWith(fontSize: 14),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleSmall!.copyWith(fontSize: 14),
                   ),
                   SizedBox(height: 8),
                   Text(
                     "${gameInfoDialog.wrongAnswerScore}",
                     textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall!
-                        .copyWith(fontSize: 14),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleSmall!.copyWith(fontSize: 14),
                   ),
                 ],
               ),
@@ -87,19 +80,17 @@ class CommonInfoDialogView extends StatelessWidget {
                   Text(
                     "for correct answer",
                     textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium!
-                        .copyWith(fontSize: 14),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleMedium!.copyWith(fontSize: 14),
                   ),
                   SizedBox(height: 8),
                   Text(
                     "for wrong answer",
                     textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium!
-                        .copyWith(fontSize: 14),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleMedium!.copyWith(fontSize: 14),
                   ),
                 ],
               ),
@@ -119,24 +110,27 @@ class CommonInfoDialogView extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Container(
-                    alignment: Alignment.center,
-                    height: 44,
-                    width: 164,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xffF48C06), Color(0xffD00000)],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
+                  alignment: Alignment.center,
+                  height: 44,
+                  width: 164,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xffF48C06), Color(0xffD00000)],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
                     ),
-                    child: Text("GOT IT!",
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(fontSize: 18, color: Colors.white))),
+                  ),
+                  child: Text(
+                    "GOT IT!",
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

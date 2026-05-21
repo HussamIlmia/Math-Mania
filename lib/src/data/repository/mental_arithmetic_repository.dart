@@ -4,7 +4,7 @@ import '/src/utility/math_util.dart';
 class MentalArithmeticRepository {
   static List<int> listHasCode = <int>[];
 
-  static getMentalArithmeticDataList(int level) {
+  static List<MentalArithmetic> getMentalArithmeticDataList(int level) {
     if (level == 1) {
       listHasCode.clear();
     }
@@ -19,7 +19,7 @@ class MentalArithmeticRepository {
             expression.firstOperand,
             "${expression.operator1}${expression.secondOperand}",
             "${expression.operator2}${expression.thirdOperand}",
-            ""
+            "",
           ],
           answer: expression.answer,
         );

@@ -1,21 +1,19 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import '/src/data/models/picture_puzzle.dart';
 import '/src/ui/app/game_provider.dart';
 import '/src/core/app_constant.dart';
 
 class PicturePuzzleProvider extends GameProvider<PicturePuzzle> {
+  @override
   late String result;
+  @override
   final DifficultyType difficultyType;
 
-  PicturePuzzleProvider({
-    required TickerProvider vsync,
-    required this.difficultyType,
-  }) : super(
-          vsync: vsync,
-          gameCategoryType: GameCategoryType.PICTURE_PUZZLE,
-          difficultyType: difficultyType,
-        ) {
+  PicturePuzzleProvider({required super.vsync, required this.difficultyType})
+    : super(
+        gameCategoryType: GameCategoryType.PICTURE_PUZZLE,
+        difficultyType: difficultyType,
+      ) {
     startGame();
   }
 
@@ -38,7 +36,7 @@ class PicturePuzzleProvider extends GameProvider<PicturePuzzle> {
   }
 
   void backPress() {
-    if (result.length > 0) {
+    if (result.isNotEmpty) {
       result = result.substring(0, result.length - 1);
       notifyListeners();
     }

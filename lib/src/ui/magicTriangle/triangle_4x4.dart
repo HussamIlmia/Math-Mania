@@ -12,7 +12,8 @@ class Triangle4x4 extends StatelessWidget {
   final double triangleWidth;
   final Tuple2<Color, Color> colorTuple;
 
-  Triangle4x4({
+  const Triangle4x4({
+    super.key,
     required this.radius,
     required this.padding,
     required this.triangleHeight,
@@ -31,101 +32,101 @@ class Triangle4x4 extends StatelessWidget {
           Positioned(
             top: padding,
             left: triangleWidth / 2 - radius,
+            height: (radius * 2),
+            width: (radius * 2),
             child: TriangleInputButton(
               input: magicTriangleProvider.currentState.listTriangle[0],
               index: 0,
               colorTuple: colorTuple,
             ),
-            height: (radius * 2),
-            width: (radius * 2),
           ), // first
           Positioned(
             top: (triangleHeight - ((radius + padding) * 2)) / 3 + padding,
             left: (triangleWidth - ((radius + padding) * 2)) / 3 + padding,
+            height: (radius * 2),
+            width: (radius * 2),
             child: TriangleInputButton(
               input: magicTriangleProvider.currentState.listTriangle[1],
               index: 1,
               colorTuple: colorTuple,
             ),
-            height: (radius * 2),
-            width: (radius * 2),
           ), // second one
           Positioned(
             top: (triangleHeight - ((radius + padding) * 2)) / 3 + padding,
             right: (triangleWidth - ((radius + padding) * 2)) / 3 + padding,
+            height: (radius * 2),
+            width: (radius * 2),
             child: TriangleInputButton(
               input: magicTriangleProvider.currentState.listTriangle[2],
               index: 2,
               colorTuple: colorTuple,
             ),
-            height: (radius * 2),
-            width: (radius * 2),
           ), // third
           Positioned(
             bottom: (triangleHeight - ((radius + padding) * 2)) / 3 + padding,
             left: (triangleWidth - ((radius + padding) * 2)) / 6 + padding,
+            height: (radius * 2),
+            width: (radius * 2),
             child: TriangleInputButton(
               input: magicTriangleProvider.currentState.listTriangle[3],
               index: 3,
               colorTuple: colorTuple,
             ),
-            height: (radius * 2),
-            width: (radius * 2),
           ), // fourth one
           Positioned(
             bottom: (triangleHeight - ((radius + padding) * 2)) / 3 + padding,
             right: (triangleWidth - ((radius + padding) * 2)) / 6 + padding,
+            height: (radius * 2),
+            width: (radius * 2),
             child: TriangleInputButton(
               input: magicTriangleProvider.currentState.listTriangle[4],
               index: 4,
               colorTuple: colorTuple,
             ),
-            height: (radius * 2),
-            width: (radius * 2),
           ), // fifth
           Positioned(
             bottom: padding,
             left: padding,
+            height: (radius * 2),
+            width: (radius * 2),
             child: TriangleInputButton(
               input: magicTriangleProvider.currentState.listTriangle[5],
               index: 5,
               colorTuple: colorTuple,
             ),
-            height: (radius * 2),
-            width: (radius * 2),
           ), // fourth
           Positioned(
             bottom: padding,
             left: (triangleWidth - ((radius + padding) * 2)) / 3 + padding,
+            height: (radius * 2),
+            width: (radius * 2),
             child: TriangleInputButton(
               input: magicTriangleProvider.currentState.listTriangle[6],
               index: 6,
               colorTuple: colorTuple,
             ),
-            height: (radius * 2),
-            width: (radius * 2),
           ), // sixth
           Positioned(
             bottom: padding,
             right: (triangleWidth - ((radius + padding) * 2)) / 3 + padding,
+            height: (radius * 2),
+            width: (radius * 2),
             child: TriangleInputButton(
               input: magicTriangleProvider.currentState.listTriangle[7],
               index: 7,
               colorTuple: colorTuple,
             ),
-            height: (radius * 2),
-            width: (radius * 2),
           ), // seventh
           Positioned(
             bottom: padding,
             right: padding,
+            height: (radius * 2),
+            width: (radius * 2),
             child: TriangleInputButton(
               input: magicTriangleProvider.currentState.listTriangle[8],
               index: 8,
               colorTuple: colorTuple,
             ),
-            height: (radius * 2),
-            width: (radius * 2),
           ), //ninth
         ],
       ),

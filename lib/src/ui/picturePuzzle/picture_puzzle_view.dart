@@ -18,10 +18,7 @@ import '/src/ui/common/vsync_provider.dart';
 class PicturePuzzleView extends StatelessWidget {
   final Tuple2<Color, Color> colorTuple;
 
-  const PicturePuzzleView({
-    Key? key,
-    required this.colorTuple,
-  }) : super(key: key);
+  const PicturePuzzleView({super.key, required this.colorTuple});
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +26,11 @@ class PicturePuzzleView extends StatelessWidget {
       providers: [
         const VsyncProvider(),
         ChangeNotifierProvider<PicturePuzzleProvider>(
-            create: (context) => PicturePuzzleProvider(
-                  vsync: VsyncProvider.of(context),
-                  difficultyType: context.read<ThemeProvider>().difficultyType,
-                ))
+          create: (context) => PicturePuzzleProvider(
+            vsync: VsyncProvider.of(context),
+            difficultyType: context.read<ThemeProvider>().difficultyType,
+          ),
+        ),
       ],
       child: PopScope(
         canPop: false,
@@ -48,80 +46,88 @@ class PicturePuzzleView extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     CommonInfoTextView<PicturePuzzleProvider>(
-                        gameCategoryType: GameCategoryType.PICTURE_PUZZLE),
-                    Expanded(
-                      flex: 5,
-                      child: Selector<PicturePuzzleProvider, PicturePuzzle>(
-                          selector: (p0, p1) => p1.currentState,
-                          builder: (context, provider, child) {
-                            return Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: provider.list.asMap().entries.map((entry) {
-                                final index = entry.key;
-                                final list = entry.value;
-                                return Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: index == 3 ? 6 : 12),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: list.shapeList.map((subList) {
-                                      return PicturePuzzleButton(
-                                        picturePuzzleShape: subList,
-                                        shapeColor: colorTuple.item1,
-                                        colorTuple: colorTuple,
-                                      );
-                                    }).toList(),
-                                  ),
-                                );
-                              }).toList(),
-                            );
-                          }),
+                      gameCategoryType: GameCategoryType.PICTURE_PUZZLE,
                     ),
                     Expanded(
                       flex: 5,
-                      child: LayoutBuilder(builder: (context, constraints) {
-                        return GridView(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            childAspectRatio: (constraints.maxWidth / 3) /
-                                ((constraints.maxHeight - 24) / 4),
-                          ),
-                          padding: const EdgeInsets.only(bottom: 24),
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          children: [
-                            ...[
-                              "7",
-                              "8",
-                              "9",
-                              "4",
-                              "5",
-                              "6",
-                              "1",
-                              "2",
-                              "3",
-                              "Clear",
-                              "0",
-                              "Back"
-                            ].map(
-                              (e) {
+                      child: Selector<PicturePuzzleProvider, PicturePuzzle>(
+                        selector: (p0, p1) => p1.currentState,
+                        builder: (context, provider, child) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: provider.list.asMap().entries.map((
+                              entry,
+                            ) {
+                              final index = entry.key;
+                              final list = entry.value;
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: index == 3 ? 6 : 12,
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: list.shapeList.map((subList) {
+                                    return PicturePuzzleButton(
+                                      picturePuzzleShape: subList,
+                                      shapeColor: colorTuple.item1,
+                                      colorTuple: colorTuple,
+                                    );
+                                  }).toList(),
+                                ),
+                              );
+                            }).toList(),
+                          );
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      flex: 5,
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return GridView(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  childAspectRatio:
+                                      (constraints.maxWidth / 3) /
+                                      ((constraints.maxHeight - 24) / 4),
+                                ),
+                            padding: const EdgeInsets.only(bottom: 24),
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            children: [
+                              ...[
+                                "7",
+                                "8",
+                                "9",
+                                "4",
+                                "5",
+                                "6",
+                                "1",
+                                "2",
+                                "3",
+                                "Clear",
+                                "0",
+                                "Back",
+                              ].map((e) {
                                 if (e == "Clear") {
                                   return CommonClearButton(
-                                      text: "Clear",
-                                      onTab: () {
-                                        context
-                                            .read<PicturePuzzleProvider>()
-                                            .clearResult();
-                                      });
+                                    text: "Clear",
+                                    onTab: () {
+                                      context
+                                          .read<PicturePuzzleProvider>()
+                                          .clearResult();
+                                    },
+                                  );
                                 } else if (e == "Back") {
-                                  return CommonBackButton(onTab: () {
-                                    context
-                                        .read<PicturePuzzleProvider>()
-                                        .backPress();
-                                  });
+                                  return CommonBackButton(
+                                    onTab: () {
+                                      context
+                                          .read<PicturePuzzleProvider>()
+                                          .backPress();
+                                    },
+                                  );
                                 } else {
                                   return CommonTextButton(
                                     text: e,
@@ -133,11 +139,11 @@ class PicturePuzzleView extends StatelessWidget {
                                     },
                                   );
                                 }
-                              },
-                            )
-                          ],
-                        );
-                      }),
+                              }),
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),

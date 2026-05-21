@@ -10,7 +10,8 @@ class MathGridButton extends StatelessWidget {
   final int index;
   final Tuple2<Color, Color> colorTuple;
 
-  MathGridButton({
+  const MathGridButton({
+    super.key,
     required this.gridModel,
     required this.index,
     required this.colorTuple,
@@ -20,12 +21,13 @@ class MathGridButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.white24, width: 0.5),
-          color: gridModel.isRemoved
-              ? Theme.of(context).colorScheme.baseColor
-              : (gridModel.isActive
+        border: Border.all(color: Colors.white24, width: 0.5),
+        color: gridModel.isRemoved
+            ? Theme.of(context).colorScheme.baseColor
+            : (gridModel.isActive
                   ? Theme.of(context).colorScheme.baseColor
-                  : Colors.transparent)),
+                  : Colors.transparent),
+      ),
       child: Visibility(
         visible: !(gridModel.isRemoved),
         child: InkWell(
@@ -36,7 +38,8 @@ class MathGridButton extends StatelessWidget {
             child: Text(
               gridModel.value.toString(),
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: gridModel.isActive ? colorTuple.item1 : Colors.white),
+                color: gridModel.isActive ? colorTuple.item1 : Colors.white,
+              ),
             ),
           ),
         ),

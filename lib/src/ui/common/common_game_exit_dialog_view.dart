@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class CommonGameExitDialogView extends StatelessWidget {
   final double score;
 
-  const CommonGameExitDialogView({
-    required this.score,
-    Key? key,
-  }) : super(key: key);
+  const CommonGameExitDialogView({required this.score, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,20 +38,21 @@ class CommonGameExitDialogView extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Container(
-                        height: 44,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color(0xffF48C06), Color(0xffD00000)],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
+                      height: 44,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Color(0xffF48C06), Color(0xffD00000)],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
                         ),
-                        child: Text("YES",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(fontSize: 18, color: Colors.white))),
+                      ),
+                      child: Text(
+                        "YES",
+                        style: Theme.of(context).textTheme.titleMedium!
+                            .copyWith(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -83,10 +81,7 @@ class CommonGameExitDialogView extends StatelessWidget {
                         end: Alignment.bottomCenter,
                       ),
                     ),
-                    child: Icon(
-                      Icons.play_arrow,
-                      color: Colors.white,
-                    ),
+                    child: Icon(Icons.play_arrow, color: Colors.white),
                   ),
                 ),
               ),

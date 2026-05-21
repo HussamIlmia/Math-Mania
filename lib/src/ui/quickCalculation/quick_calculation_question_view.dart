@@ -7,11 +7,11 @@ class QuickCalculationQuestionView extends StatefulWidget {
   final QuickCalculation? previousCurrentState;
 
   const QuickCalculationQuestionView({
-    Key? key,
+    super.key,
     required this.currentState,
     required this.nextCurrentState,
     required this.previousCurrentState,
-  }) : super(key: key);
+  });
 
   @override
   _QuickCalculationQuestionViewState createState() =>
@@ -19,7 +19,8 @@ class QuickCalculationQuestionView extends StatefulWidget {
 }
 
 class _QuickCalculationQuestionViewState
-    extends State<QuickCalculationQuestionView> with TickerProviderStateMixin {
+    extends State<QuickCalculationQuestionView>
+    with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<AlignmentGeometry> _animation;
   late Animation<TextStyle> _textStyleAnimation;
@@ -37,50 +38,26 @@ class _QuickCalculationQuestionViewState
     _animation = Tween<AlignmentGeometry>(
       begin: Alignment.topLeft,
       end: Alignment.centerRight,
-    ).animate(
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeIn));
+
+    _textStyleAnimation = TextStyleTween(
+      begin: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w200),
+      end: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w700),
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.ease));
+
+    _opacityAnimationOut = Tween<double>(begin: 1.0, end: 0.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: Curves.easeIn,
+        curve: Interval(0.0, 0.3, curve: Curves.easeIn),
       ),
     );
 
-    _textStyleAnimation = TextStyleTween(
-      begin: TextStyle(
-        fontSize: 16.0,
-        fontWeight: FontWeight.w200,
+    _opacityAnimationIn = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(0.3, 0.7, curve: Curves.easeOut),
       ),
-      end: TextStyle(
-        fontSize: 30.0,
-        fontWeight: FontWeight.w700,
-      ),
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.ease,
-    ));
-
-    _opacityAnimationOut = Tween<double>(
-      begin: 1.0,
-      end: 0.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Interval(
-        0.0,
-        0.3,
-        curve: Curves.easeIn,
-      ),
-    ));
-
-    _opacityAnimationIn = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Interval(
-        0.3,
-        0.7,
-        curve: Curves.easeOut,
-      ),
-    ));
+    );
   }
 
   @override
@@ -113,8 +90,9 @@ class _QuickCalculationQuestionViewState
             opacity: _opacityAnimationOut,
             child: Text(
               widget.previousCurrentState?.question ?? "",
-              style:
-                  Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 30),
+              style: Theme.of(
+                context,
+              ).textTheme.titleSmall!.copyWith(fontSize: 30),
             ),
           ),
         ),
@@ -124,8 +102,9 @@ class _QuickCalculationQuestionViewState
             opacity: _opacityAnimationIn,
             child: Text(
               widget.nextCurrentState.question,
-              style:
-                  Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 16),
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall!.copyWith(fontSize: 16),
             ),
           ),
         ),

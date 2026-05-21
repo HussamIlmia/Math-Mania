@@ -1,14 +1,6 @@
-enum PicturePuzzleQuestionItemType {
-  shape,
-  sign,
-  hint,
-  answer,
-}
-enum PicturePuzzleShapeType {
-  CIRCLE,
-  SQUARE,
-  TRIANGLE,
-}
+enum PicturePuzzleQuestionItemType { shape, sign, hint, answer }
+
+enum PicturePuzzleShapeType { CIRCLE, SQUARE, TRIANGLE }
 
 class PicturePuzzle {
   List<PicturePuzzleShapeList> list;
@@ -54,12 +46,13 @@ class PicturePuzzleData {
   String text;
 
   PicturePuzzleData(
-      this.picturePuzzleShapeType1,
-      this.sign1,
-      this.picturePuzzleShapeType2,
-      this.sign2,
-      this.picturePuzzleShapeType3,
-      this.text);
+    this.picturePuzzleShapeType1,
+    this.sign1,
+    this.picturePuzzleShapeType2,
+    this.sign2,
+    this.picturePuzzleShapeType3,
+    this.text,
+  );
 
   @override
   String toString() {

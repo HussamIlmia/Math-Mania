@@ -13,10 +13,7 @@ import '/src/ui/common/vsync_provider.dart';
 class MathPairsView extends StatelessWidget {
   final Tuple2<Color, Color> colorTuple;
 
-  const MathPairsView({
-    Key? key,
-    required this.colorTuple,
-  }) : super(key: key);
+  const MathPairsView({super.key, required this.colorTuple});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +21,11 @@ class MathPairsView extends StatelessWidget {
       providers: [
         const VsyncProvider(),
         ChangeNotifierProvider<MathPairsProvider>(
-            create: (context) => MathPairsProvider(
-                  vsync: VsyncProvider.of(context),
-                  difficultyType: context.read<ThemeProvider>().difficultyType,
-                ))
+          create: (context) => MathPairsProvider(
+            vsync: VsyncProvider.of(context),
+            difficultyType: context.read<ThemeProvider>().difficultyType,
+          ),
+        ),
       ],
       child: PopScope(
         canPop: false,
@@ -43,15 +41,18 @@ class MathPairsView extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     CommonInfoTextView<MathPairsProvider>(
-                        gameCategoryType: GameCategoryType.MATH_PAIRS),
+                      gameCategoryType: GameCategoryType.MATH_PAIRS,
+                    ),
                     Expanded(
                       child: Center(
                         child: Consumer<MathPairsProvider>(
-                            builder: (context, mathPairsProvider, child) {
-                          return GridView.builder(
+                          builder: (context, mathPairsProvider, child) {
+                            return GridView.builder(
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3, childAspectRatio: 1.2),
+                                    crossAxisCount: 3,
+                                    childAspectRatio: 1.2,
+                                  ),
                               padding: const EdgeInsets.only(bottom: 24),
                               shrinkWrap: true,
                               itemCount:
@@ -60,12 +61,15 @@ class MathPairsView extends StatelessWidget {
                               itemBuilder: (BuildContext context, int index) {
                                 return MathPairsButton(
                                   mathPairs: mathPairsProvider
-                                      .currentState.list[index],
+                                      .currentState
+                                      .list[index],
                                   index: index,
                                   colorTuple: colorTuple,
                                 );
-                              });
-                        }),
+                              },
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ],

@@ -13,10 +13,7 @@ import '/src/ui/common/vsync_provider.dart';
 class MathGridView extends StatelessWidget {
   final Tuple2<Color, Color> colorTuple;
 
-  const MathGridView({
-    Key? key,
-    required this.colorTuple,
-  }) : super(key: key);
+  const MathGridView({super.key, required this.colorTuple});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +21,11 @@ class MathGridView extends StatelessWidget {
       providers: [
         const VsyncProvider(),
         ChangeNotifierProvider<MathGridProvider>(
-            create: (context) => MathGridProvider(
-                  vsync: VsyncProvider.of(context),
-                  difficultyType: context.read<ThemeProvider>().difficultyType,
-                ))
+          create: (context) => MathGridProvider(
+            vsync: VsyncProvider.of(context),
+            difficultyType: context.read<ThemeProvider>().difficultyType,
+          ),
+        ),
       ],
       child: PopScope(
         canPop: false,
@@ -43,23 +41,23 @@ class MathGridView extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     CommonInfoTextView<MathGridProvider>(
-                        gameCategoryType: GameCategoryType.MATH_GRID),
+                      gameCategoryType: GameCategoryType.MATH_GRID,
+                    ),
                     Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Selector<MathGridProvider, int>(
-                              selector: (p0, p1) =>
-                                  p1.currentState.currentAnswer,
-                              builder: (context, currentAnswer, child) {
-                                return Text(
-                                  currentAnswer.toString(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(fontSize: 40),
-                                );
-                              }),
+                            selector: (p0, p1) => p1.currentState.currentAnswer,
+                            builder: (context, currentAnswer, child) {
+                              return Text(
+                                currentAnswer.toString(),
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.titleSmall!.copyWith(fontSize: 40),
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -81,24 +79,30 @@ class MathGridView extends StatelessWidget {
                             ),
                           ),
                           child: Consumer<MathGridProvider>(
-                              builder: (context, listForSquare, child) {
-                            return GridView.builder(
+                            builder: (context, listForSquare, child) {
+                              return GridView.builder(
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 9),
+                                      crossAxisCount: 9,
+                                    ),
                                 itemCount: listForSquare
-                                    .currentState.listForSquare.length,
+                                    .currentState
+                                    .listForSquare
+                                    .length,
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemBuilder: (BuildContext context, int index) {
                                   return MathGridButton(
                                     gridModel: listForSquare
-                                        .currentState.listForSquare[index],
+                                        .currentState
+                                        .listForSquare[index],
                                     index: index,
                                     colorTuple: colorTuple,
                                   );
-                                });
-                          }),
+                                },
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ),

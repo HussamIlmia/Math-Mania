@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import '/src/data/models/quick_calculation.dart';
 import '/src/core/app_constant.dart';
 import '/src/ui/app/game_provider.dart';
@@ -7,16 +6,14 @@ import '/src/ui/app/game_provider.dart';
 class QuickCalculationProvider extends GameProvider<QuickCalculation> {
   late QuickCalculation nextCurrentState;
   QuickCalculation? previousCurrentState;
+  @override
   final DifficultyType difficultyType;
 
-  QuickCalculationProvider({
-    required TickerProvider vsync,
-    required this.difficultyType,
-  }) : super(
-          vsync: vsync,
-          gameCategoryType: GameCategoryType.QUICK_CALCULATION,
-          difficultyType: difficultyType,
-        ) {
+  QuickCalculationProvider({required super.vsync, required this.difficultyType})
+    : super(
+        gameCategoryType: GameCategoryType.QUICK_CALCULATION,
+        difficultyType: difficultyType,
+      ) {
     startGame();
     nextCurrentState = list[index + 1];
   }
@@ -31,7 +28,7 @@ class QuickCalculationProvider extends GameProvider<QuickCalculation> {
         loadNewDataIfRequired();
         previousCurrentState = list[index - 1];
         nextCurrentState = list[index + 1];
-        if (/*time >= 0.0125*/ timerStatus != TimerStatus.pause) increase();
+        if ( /*time >= 0.0125*/ timerStatus != TimerStatus.pause) increase();
         notifyListeners();
       } else if (result.length == currentState.answer.toString().length) {
         if (currentScore > 0) {
@@ -41,13 +38,13 @@ class QuickCalculationProvider extends GameProvider<QuickCalculation> {
     }
   }
 
-  clearResult() {
+  void clearResult() {
     result = "";
     notifyListeners();
   }
 
   void backPress() {
-    if (result.length > 0) {
+    if (result.isNotEmpty) {
       result = result.substring(0, result.length - 1);
       notifyListeners();
     }

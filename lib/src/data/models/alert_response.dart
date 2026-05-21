@@ -3,5 +3,9 @@ class AlertResponse {
   final bool restart;
   final bool play;
 
-  AlertResponse({required this.exit,required  this.restart, required this.play});
+  AlertResponse({
+    required this.exit,
+    required this.restart,
+    required this.play,
+  });
 }

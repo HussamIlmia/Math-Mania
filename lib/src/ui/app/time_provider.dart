@@ -2,23 +2,21 @@ import 'package:flutter/material.dart';
 import '/src/core/app_constant.dart';
 
 class TimeProvider with ChangeNotifier {
-  TimeProvider({
-    required TickerProvider vsync,
-    required this.totalTime,
-  }) {
-    _animationController = AnimationController(
-      vsync: vsync,
-      value: 1.0,
-      duration: Duration(seconds: totalTime),
-      animationBehavior: AnimationBehavior.preserve,
-    )..addStatusListener((status) {
-        if (status == AnimationStatus.dismissed &&
-            dialogType == DialogType.non) {
-          dialogType = DialogType.over;
-          timerStatus = TimerStatus.pause;
-          notifyListeners();
-        }
-      });
+  TimeProvider({required TickerProvider vsync, required this.totalTime}) {
+    _animationController =
+        AnimationController(
+          vsync: vsync,
+          value: 1.0,
+          duration: Duration(seconds: totalTime),
+          animationBehavior: AnimationBehavior.preserve,
+        )..addStatusListener((status) {
+          if (status == AnimationStatus.dismissed &&
+              dialogType == DialogType.non) {
+            dialogType = DialogType.over;
+            timerStatus = TimerStatus.pause;
+            notifyListeners();
+          }
+        });
   }
 
   final int totalTime;

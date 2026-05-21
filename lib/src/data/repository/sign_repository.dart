@@ -4,22 +4,29 @@ import '/src/utility/math_util.dart';
 class SignRepository {
   static List<int> listHasCode = <int>[];
 
-  static getSignDataList(int level) {
+  static List<Sign> getSignDataList(int level) {
     List<Sign> list = <Sign>[];
 
     if (level == 1) {
       listHasCode.clear();
     }
     while (list.length < 5) {
-      MathUtil.generate(level, 5 - list.length)
-          .forEach((Expression expression) {
+      MathUtil.generate(level, 5 - list.length).forEach((
+        Expression expression,
+      ) {
         Sign? signQandS;
         if (expression.operator2 == null) {
           if (expression.operator1 == "+") {
-            if (MathUtil.evaluate(int.parse(expression.firstOperand), "+",
-                    int.parse(expression.secondOperand)) !=
-                MathUtil.evaluate(int.parse(expression.firstOperand), "*",
-                    int.parse(expression.secondOperand))) {
+            if (MathUtil.evaluate(
+                  int.parse(expression.firstOperand),
+                  "+",
+                  int.parse(expression.secondOperand),
+                ) !=
+                MathUtil.evaluate(
+                  int.parse(expression.firstOperand),
+                  "*",
+                  int.parse(expression.secondOperand),
+                )) {
               signQandS = Sign(
                 firstDigit: expression.firstOperand,
                 sign: expression.operator1,
@@ -28,10 +35,16 @@ class SignRepository {
               );
             }
           } else if (expression.operator1 == "/") {
-            if (MathUtil.evaluate(int.parse(expression.firstOperand), "/",
-                    int.parse(expression.secondOperand)) !=
-                MathUtil.evaluate(int.parse(expression.firstOperand), "-",
-                    int.parse(expression.secondOperand))) {
+            if (MathUtil.evaluate(
+                  int.parse(expression.firstOperand),
+                  "/",
+                  int.parse(expression.secondOperand),
+                ) !=
+                MathUtil.evaluate(
+                  int.parse(expression.firstOperand),
+                  "-",
+                  int.parse(expression.secondOperand),
+                )) {
               signQandS = Sign(
                 firstDigit: expression.firstOperand,
                 sign: expression.operator1,

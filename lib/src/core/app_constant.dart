@@ -14,26 +14,16 @@ enum GameCategoryType {
   QUICK_CALCULATION,
   MATH_GRID,
   PICTURE_PUZZLE,
-  NUMBER_PYRAMID
+  NUMBER_PYRAMID,
 }
 
 enum PuzzleType { MATH_PUZZLE, MEMORY_PUZZLE, BRAIN_PUZZLE }
 
-enum TimerStatus {
-  restart,
-  play,
-  pause,
-}
+enum TimerStatus { restart, play, pause }
 
 enum DifficultyType { HIGH, MEDIUM, LOW }
 
-enum DialogType {
-  non,
-  info,
-  over,
-  pause,
-  exit,
-}
+enum DialogType { non, info, over, pause, exit }
 
 class KeyUtil {
   static const IS_DARK_MODE = "isDarkMode";

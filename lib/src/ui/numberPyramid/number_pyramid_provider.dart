@@ -1,21 +1,18 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import '/src/data/models/number_pyramid.dart';
 import '/src/core/app_constant.dart';
 
 import '/src/ui/app/game_provider.dart';
 
 class NumberPyramidProvider extends GameProvider<NumberPyramid> {
+  @override
   final DifficultyType difficultyType;
 
-  NumberPyramidProvider({
-    required TickerProvider vsync,
-    required this.difficultyType,
-  }) : super(
-          vsync: vsync,
-          gameCategoryType: GameCategoryType.NUMBER_PYRAMID,
-          difficultyType: difficultyType,
-        ) {
+  NumberPyramidProvider({required super.vsync, required this.difficultyType})
+    : super(
+        gameCategoryType: GameCategoryType.NUMBER_PYRAMID,
+        difficultyType: difficultyType,
+      ) {
     startGame();
   }
 
@@ -25,8 +22,9 @@ class NumberPyramidProvider extends GameProvider<NumberPyramid> {
       return;
     }
     //first find previously selected index
-    var previouslySelectedCell =
-        currentState.list.indexWhere((cell) => cell.isActive == true);
+    var previouslySelectedCell = currentState.list.indexWhere(
+      (cell) => cell.isActive == true,
+    );
     if (!previouslySelectedCell.isNegative) {
       currentState.list[previouslySelectedCell].isActive = false;
     }
@@ -36,8 +34,9 @@ class NumberPyramidProvider extends GameProvider<NumberPyramid> {
   }
 
   void pyramidBoxInputValue(String value) {
-    var currentActiveCellIndex =
-        currentState.list.indexWhere((cell) => cell.isActive == true);
+    var currentActiveCellIndex = currentState.list.indexWhere(
+      (cell) => cell.isActive == true,
+    );
     if (currentActiveCellIndex == -1) {
       return;
     }
@@ -47,8 +46,9 @@ class NumberPyramidProvider extends GameProvider<NumberPyramid> {
       notifyListeners();
       return;
     }
-    var listOfCellWithValues =
-        currentState.list.where((cell) => cell.text.isNotEmpty);
+    var listOfCellWithValues = currentState.list.where(
+      (cell) => cell.text.isNotEmpty,
+    );
 
     if (value == "Done") {
       if (listOfCellWithValues.length == currentState.remainingCell) {

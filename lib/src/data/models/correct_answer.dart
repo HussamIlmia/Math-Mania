@@ -53,8 +53,5 @@ class Operand {
   final String value;
   final bool isQuestionMark;
 
-  Operand({
-    required this.value,
-    required this.isQuestionMark,
-  });
+  Operand({required this.value, required this.isQuestionMark});
 }

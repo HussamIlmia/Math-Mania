@@ -1,21 +1,19 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import '/src/data/models/calculator.dart';
 import '/src/core/app_constant.dart';
 import '/src/ui/app/game_provider.dart';
 
 class CalculatorProvider extends GameProvider<Calculator> {
+  @override
   late String result;
+  @override
   final DifficultyType difficultyType;
 
-  CalculatorProvider({
-    required TickerProvider vsync,
-    required this.difficultyType,
-  }) : super(
-          vsync: vsync,
-          gameCategoryType: GameCategoryType.CALCULATOR,
-          difficultyType: difficultyType,
-        ) {
+  CalculatorProvider({required super.vsync, required this.difficultyType})
+    : super(
+        gameCategoryType: GameCategoryType.CALCULATOR,
+        difficultyType: difficultyType,
+      ) {
     startGame();
   }
 
@@ -38,7 +36,7 @@ class CalculatorProvider extends GameProvider<Calculator> {
   }
 
   void backPress() {
-    if (result.length > 0) {
+    if (result.isNotEmpty) {
       result = result.substring(0, result.length - 1);
       notifyListeners();
     }

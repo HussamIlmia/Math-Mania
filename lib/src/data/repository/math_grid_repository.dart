@@ -16,7 +16,8 @@ class MathGridRepository {
     int sum = 0;
     List<int> list = <int>[];
     List<MathGridCellModel> listGrid = <MathGridCellModel>[];
-    list = listOf9 +
+    list =
+        listOf9 +
         listOf8 +
         listOf7 +
         listOf6 +
@@ -34,14 +35,14 @@ class MathGridRepository {
   }
 
   static int generateRandomAnswer() {
-    final _random = new Random();
+    final random = Random();
     int min = 5;
     int max = 40;
-    int result = min + _random.nextInt(max - min);
+    int result = min + random.nextInt(max - min);
     return result;
   }
 
-  static getMathGridData(int level) {
+  static List<MathGrid> getMathGridData(int level) {
     List<MathGrid> list = <MathGrid>[];
     list.add(listForSquare());
     list.add(listForSquare());
@@ -52,5 +53,4 @@ class MathGridRepository {
   }
 }
 
-void main() {
-}
+void main() {}

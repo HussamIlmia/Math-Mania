@@ -1,21 +1,19 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import '/src/data/models/correct_answer.dart';
 import '/src/core/app_constant.dart';
 import '/src/ui/app/game_provider.dart';
 
 class CorrectAnswerProvider extends GameProvider<CorrectAnswer> {
+  @override
   late String result;
+  @override
   final DifficultyType difficultyType;
 
-  CorrectAnswerProvider({
-    required TickerProvider vsync,
-    required this.difficultyType,
-  }) : super(
-          vsync: vsync,
-          gameCategoryType: GameCategoryType.CORRECT_ANSWER,
-          difficultyType: difficultyType,
-        ) {
+  CorrectAnswerProvider({required super.vsync, required this.difficultyType})
+    : super(
+        gameCategoryType: GameCategoryType.CORRECT_ANSWER,
+        difficultyType: difficultyType,
+      ) {
     startGame();
   }
 

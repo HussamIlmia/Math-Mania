@@ -16,6 +16,14 @@ class NumPyramidCellModel {
   bool isHint;
   bool isDone;
 
-  NumPyramidCellModel(this.id, this.text, this.numberOnCell, this.isActive,
-      this.isCorrect, this.isHidden, this.isHint, this.isDone);
+  NumPyramidCellModel(
+    this.id,
+    this.text,
+    this.numberOnCell,
+    this.isActive,
+    this.isCorrect,
+    this.isHidden,
+    this.isHint,
+    this.isDone,
+  );
 }

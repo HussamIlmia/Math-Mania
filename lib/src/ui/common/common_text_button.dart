@@ -7,7 +7,8 @@ class CommonTextButton extends StatelessWidget {
   final Function onTab;
   final Tuple2<Color, Color> colorTuple;
 
-  CommonTextButton({
+  const CommonTextButton({
+    super.key,
     required this.text,
     required this.onTab,
     required this.colorTuple,
@@ -18,9 +19,7 @@ class CommonTextButton extends StatelessWidget {
     return CommonTabAnimationView(
       onTab: onTab,
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         elevation: 2,
         child: Container(
           decoration: BoxDecoration(
@@ -34,10 +33,10 @@ class CommonTextButton extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             text,
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(fontSize: 24, color: Colors.white),
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+              fontSize: 24,
+              color: Colors.white,
+            ),
           ),
         ),
       ),

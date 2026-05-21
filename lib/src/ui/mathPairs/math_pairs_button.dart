@@ -10,7 +10,8 @@ class MathPairsButton extends StatelessWidget {
   final int index;
   final Tuple2<Color, Color> colorTuple;
 
-  MathPairsButton({
+  const MathPairsButton({
+    super.key,
     required this.mathPairs,
     required this.index,
     required this.colorTuple,
@@ -22,16 +23,15 @@ class MathPairsButton extends StatelessWidget {
       opacity: mathPairs.isVisible ? 1 : 0,
       duration: Duration(milliseconds: 300),
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         elevation: 2,
         child: InkWell(
           onTap: mathPairs.isVisible
               ? () {
-                  context
-                      .read<MathPairsProvider>()
-                      .checkResult(mathPairs, index);
+                  context.read<MathPairsProvider>().checkResult(
+                    mathPairs,
+                    index,
+                  );
                 }
               : null,
           borderRadius: BorderRadius.all(Radius.circular(24)),
@@ -55,10 +55,11 @@ class MathPairsButton extends StatelessWidget {
               child: Text(
                 mathPairs.text,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    fontSize: 24,
-                    color: mathPairs.isActive
-                        ? Theme.of(context).colorScheme.baseColor
-                        : colorTuple.item1),
+                  fontSize: 24,
+                  color: mathPairs.isActive
+                      ? Theme.of(context).colorScheme.baseColor
+                      : colorTuple.item1,
+                ),
               ),
             ),
           ),

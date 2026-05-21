@@ -4,7 +4,7 @@ import '/src/utility/math_util.dart';
 class MathPairsRepository {
   static List<int> listHasCode = <int>[];
 
-  static getMathPairsDataList(int level) {
+  static List<MathPairs> getMathPairsDataList(int level) {
     if (level == 1) {
       listHasCode.clear();
     }
@@ -15,13 +15,16 @@ class MathPairsRepository {
     List<Pair> list = <Pair>[];
 
     while (list.length < totalPairs) {
-      MathUtil.getMathPair(level, (totalPairs ~/ 2) - (list.length ~/ 2))
-          .forEach((Expression expression) {
+      MathUtil.getMathPair(
+        level,
+        (totalPairs ~/ 2) - (list.length ~/ 2),
+      ).forEach((Expression expression) {
         Pair mathPair1 = Pair(
-            i,
-            "${expression.firstOperand} ${expression.operator1} ${expression.secondOperand}",
-            false,
-            true);
+          i,
+          "${expression.firstOperand} ${expression.operator1} ${expression.secondOperand}",
+          false,
+          true,
+        );
         Pair mathPair2 = Pair(i, "${expression.answer}", false, true);
         if (!list.contains(mathPair2) &&
             !listHasCode.contains(mathPair1.hashCode)) {

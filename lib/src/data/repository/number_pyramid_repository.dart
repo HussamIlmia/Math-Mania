@@ -38,13 +38,18 @@ class NumberPyramidRepository {
     [2, 3, 7, 8, 11, 12, 14],
   ];
 
-  static getPyramidDataList(int level) {
+  static List<NumberPyramid> getPyramidDataList(int level) {
     List<NumberPyramid> pyramidsList = <NumberPyramid>[];
 
     for (int i = 0; i < 20; i++) {
       var singlePyramidResult = generateSinglePyramidValues();
-      pyramidsList.add(NumberPyramid(
-          i, singlePyramidResult.item1, singlePyramidResult.item2 + 1));
+      pyramidsList.add(
+        NumberPyramid(
+          i,
+          singlePyramidResult.item1,
+          singlePyramidResult.item2 + 1,
+        ),
+      );
     }
 
     return pyramidsList;
@@ -57,39 +62,50 @@ class NumberPyramidRepository {
     int max = 8;
 
     List<NumPyramidCellModel> baseLineList = generateBaseLineOfPyramid(
-        min, max); // generating bottom line of pyramid
+      min,
+      max,
+    ); // generating bottom line of pyramid
     singlePyramidList.addAll(baseLineList);
-    generateUpperLineOfPyramid(baseLineList,
-        counter); // generating upper line of pyramid by looping one by one
+    generateUpperLineOfPyramid(
+      baseLineList,
+      counter,
+    ); // generating upper line of pyramid by looping one by one
 
-    final _random = new Random();
-    var selectedHintList = hintLists[_random.nextInt(hintLists.length)];
+    final random = Random();
+    var selectedHintList = hintLists[random.nextInt(hintLists.length)];
 
     for (int i = 0; i < selectedHintList.length; i++) {
       singlePyramidList[selectedHintList[i]].isHidden = false;
       singlePyramidList[selectedHintList[i]].isHint = true;
     }
 
-    return new Tuple2(singlePyramidList, (27 - selectedHintList.length));
+    return Tuple2(singlePyramidList, (27 - selectedHintList.length));
   }
 
-  static generateUpperLineOfPyramid(
-      List<NumPyramidCellModel> baseLineCellList, int counter) {
+  static void generateUpperLineOfPyramid(
+    List<NumPyramidCellModel> baseLineCellList,
+    int counter,
+  ) {
     makeSumForPyramid(baseLineCellList, 6, counter);
   }
 
-  static makeSumForPyramid(
-      List<NumPyramidCellModel> list, int loopTime, int counter) {
+  static void makeSumForPyramid(
+    List<NumPyramidCellModel> list,
+    int loopTime,
+    int counter,
+  ) {
     if (loopTime == 0) {
       return;
     }
     List<NumPyramidCellModel> tempList = <NumPyramidCellModel>[];
     for (int k = 0; k < list.length - 1; k++) {
       int sum = list[k].numberOnCell + list[k + 1].numberOnCell;
-      singlePyramidList.add(NumPyramidCellModel(
-          counter, "", sum, false, false, true, false, false));
-      tempList.add(NumPyramidCellModel(
-          counter, "", sum, false, false, true, false, false));
+      singlePyramidList.add(
+        NumPyramidCellModel(counter, "", sum, false, false, true, false, false),
+      );
+      tempList.add(
+        NumPyramidCellModel(counter, "", sum, false, false, true, false, false),
+      );
       counter++;
     }
     loopTime--;
@@ -101,8 +117,18 @@ class NumberPyramidRepository {
     cellList.clear();
     for (int i = 0; i < 7; i++) {
       int randomNum = MathUtil.generateRandomAnswer(min, max);
-      cellList.add(NumPyramidCellModel(
-          counter, "", randomNum, false, false, true, false, false));
+      cellList.add(
+        NumPyramidCellModel(
+          counter,
+          "",
+          randomNum,
+          false,
+          false,
+          true,
+          false,
+          false,
+        ),
+      );
       counter++;
     }
     return cellList;

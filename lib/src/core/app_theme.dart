@@ -9,16 +9,13 @@ class AppTheme {
       scaffoldBackgroundColor: Colors.white,
       cardColor: Colors.white,
       textTheme: base.textTheme.copyWith(
-        bodySmall: base.textTheme.bodySmall!.copyWith(
-          color: Color(0xff757575),
-        ),
+        bodySmall: base.textTheme.bodySmall!.copyWith(color: Color(0xff757575)),
       ),
       brightness: Brightness.light,
       appBarTheme: const AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       colorScheme: ColorScheme(
-        background: Colors.white,
         brightness: Brightness.light,
         primary: Colors.blue,
         onPrimary: Colors.white,
@@ -39,16 +36,13 @@ class AppTheme {
       scaffoldBackgroundColor: Colors.black,
       cardColor: Colors.black,
       textTheme: base.textTheme.copyWith(
-        bodySmall: base.textTheme.bodySmall!.copyWith(
-          color: Color(0xffcdcdcd),
-        ),
+        bodySmall: base.textTheme.bodySmall!.copyWith(color: Color(0xffcdcdcd)),
       ),
       brightness: Brightness.dark,
       appBarTheme: const AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
       colorScheme: ColorScheme(
-        background: Colors.black,
         brightness: Brightness.dark,
         primary: Colors.blue,
         onPrimary: Colors.white,

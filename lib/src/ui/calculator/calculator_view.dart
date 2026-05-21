@@ -17,10 +17,7 @@ import '/src/ui/common/vsync_provider.dart';
 class CalculatorView extends StatelessWidget {
   final Tuple2<Color, Color> colorTuple;
 
-  const CalculatorView({
-    Key? key,
-    required this.colorTuple,
-  }) : super(key: key);
+  const CalculatorView({super.key, required this.colorTuple});
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +25,11 @@ class CalculatorView extends StatelessWidget {
       providers: [
         const VsyncProvider(),
         ChangeNotifierProvider<CalculatorProvider>(
-            create: (context) => CalculatorProvider(
-                  vsync: VsyncProvider.of(context),
-                  difficultyType: context.read<ThemeProvider>().difficultyType,
-                ))
+          create: (context) => CalculatorProvider(
+            vsync: VsyncProvider.of(context),
+            difficultyType: context.read<ThemeProvider>().difficultyType,
+          ),
+        ),
       ],
       child: PopScope(
         canPop: false,
@@ -47,22 +45,23 @@ class CalculatorView extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     CommonInfoTextView<CalculatorProvider>(
-                        gameCategoryType: GameCategoryType.CALCULATOR),
+                      gameCategoryType: GameCategoryType.CALCULATOR,
+                    ),
                     Expanded(
                       flex: 2,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Consumer<CalculatorProvider>(
-                              builder: (context, calculatorProvider, child) {
-                            return Text(
-                              calculatorProvider.currentState.question,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .copyWith(fontSize: 30),
-                            );
-                          }),
+                            builder: (context, calculatorProvider, child) {
+                              return Text(
+                                calculatorProvider.currentState.question,
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.titleSmall!.copyWith(fontSize: 30),
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -83,12 +82,11 @@ class CalculatorView extends StatelessWidget {
                           builder: (context, result, child) {
                             return Text(
                               result,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
+                              style: Theme.of(context).textTheme.titleSmall!
                                   .copyWith(
-                                  fontSize: 30,
-                                  color: colorTuple.item1),
+                                    fontSize: 30,
+                                    color: colorTuple.item1,
+                                  ),
                             );
                           },
                         ),
@@ -97,47 +95,51 @@ class CalculatorView extends StatelessWidget {
                     SizedBox(height: 24),
                     Expanded(
                       flex: 8,
-                      child: LayoutBuilder(builder: (context, constraints) {
-                        return GridView(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            childAspectRatio: (constraints.maxWidth / 3) /
-                                ((constraints.maxHeight - 24) / 4),
-                          ),
-                          padding: const EdgeInsets.only(bottom: 24),
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          children: [
-                            ...[
-                              "7",
-                              "8",
-                              "9",
-                              "4",
-                              "5",
-                              "6",
-                              "1",
-                              "2",
-                              "3",
-                              "Clear",
-                              "0",
-                              "Back"
-                            ].map(
-                              (e) {
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return GridView(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  childAspectRatio:
+                                      (constraints.maxWidth / 3) /
+                                      ((constraints.maxHeight - 24) / 4),
+                                ),
+                            padding: const EdgeInsets.only(bottom: 24),
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            children: [
+                              ...[
+                                "7",
+                                "8",
+                                "9",
+                                "4",
+                                "5",
+                                "6",
+                                "1",
+                                "2",
+                                "3",
+                                "Clear",
+                                "0",
+                                "Back",
+                              ].map((e) {
                                 if (e == "Clear") {
                                   return CommonClearButton(
-                                      text: "Clear",
-                                      onTab: () {
-                                        context
-                                            .read<CalculatorProvider>()
-                                            .clearResult();
-                                      });
+                                    text: "Clear",
+                                    onTab: () {
+                                      context
+                                          .read<CalculatorProvider>()
+                                          .clearResult();
+                                    },
+                                  );
                                 } else if (e == "Back") {
-                                  return CommonBackButton(onTab: () {
-                                    context
-                                        .read<CalculatorProvider>()
-                                        .backPress();
-                                  });
+                                  return CommonBackButton(
+                                    onTab: () {
+                                      context
+                                          .read<CalculatorProvider>()
+                                          .backPress();
+                                    },
+                                  );
                                 } else {
                                   return CommonNumberButton(
                                     text: e,
@@ -149,11 +151,11 @@ class CalculatorView extends StatelessWidget {
                                     colorTuple: colorTuple,
                                   );
                                 }
-                              },
-                            )
-                          ],
-                        );
-                      }),
+                              }),
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),

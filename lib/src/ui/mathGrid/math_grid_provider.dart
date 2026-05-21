@@ -1,21 +1,18 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import '/src/data/models/math_grid.dart';
 import '/src/core/app_constant.dart';
 import '/src/ui/app/game_provider.dart';
 
 class MathGridProvider extends GameProvider<MathGrid> {
   int answerIndex = 0;
+  @override
   final DifficultyType difficultyType;
 
-  MathGridProvider({
-    required TickerProvider vsync,
-    required this.difficultyType,
-  }) : super(
-          vsync: vsync,
-          gameCategoryType: GameCategoryType.MATH_GRID,
-          difficultyType: difficultyType,
-        ) {
+  MathGridProvider({required super.vsync, required this.difficultyType})
+    : super(
+        gameCategoryType: GameCategoryType.MATH_GRID,
+        difficultyType: difficultyType,
+      ) {
     startGame();
   }
 
@@ -64,7 +61,7 @@ class MathGridProvider extends GameProvider<MathGrid> {
     }
   }
 
-  clear() {
+  void clear() {
     notifyListeners();
   }
 }

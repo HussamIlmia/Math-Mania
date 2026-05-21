@@ -15,7 +15,7 @@ class MagicTriangleRepository {
     "126": [1, 4, 9, 16, 25, 36, 49, 64, 81],
   };
 
-  static getTriangleDataProviderList() {
+  static List<MagicTriangle> getTriangleDataProviderList() {
     List<MagicTriangle> list = <MagicTriangle>[];
 
     list.add(
@@ -58,7 +58,7 @@ class MagicTriangleRepository {
     return list;
   }
 
-  static getNextLevelTriangleDataProviderList() {
+  static List<MagicTriangle> getNextLevelTriangleDataProviderList() {
     List<MagicTriangle> list = <MagicTriangle>[];
 
     list.add(
