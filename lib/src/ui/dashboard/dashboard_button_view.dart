@@ -48,14 +48,16 @@ class DashboardButtonView extends StatelessWidget {
                 children: [
                   Align(
                     alignment: Alignment.bottomLeft,
-                    child: Transform(
-                      transform: Matrix4.identity().scaled(5.0)
-                        ..translate(0.0, -27.0),
-                      child: SvgPicture.asset(
-                        dashboard.icon,
-                        colorFilter: ColorFilter.mode(
-                          Colors.white.withValues(alpha: dashboard.opacity),
-                          BlendMode.srcIn,
+                    child: Transform.translate(
+                      offset: const Offset(0, -27),
+                      child: Transform.scale(
+                        scale: 5,
+                        child: SvgPicture.asset(
+                          dashboard.icon,
+                          colorFilter: ColorFilter.mode(
+                            Colors.white.withValues(alpha: dashboard.opacity),
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ),
                     ),
@@ -81,8 +83,8 @@ class DashboardButtonView extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: Transform(
-                      transform: Matrix4.identity()..translate(0.0, 2),
+                    child: Transform.translate(
+                      offset: const Offset(0, 2),
                       child: SvgPicture.asset(AppAssets.icButtonShape),
                     ),
                   ),

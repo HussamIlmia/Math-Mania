@@ -48,14 +48,16 @@ class HomeButtonView extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.bottomRight,
-                  child: Transform(
-                    transform: Matrix4.identity().scaled(5.2)
-                      ..translate(-17.0, -27.0),
-                    child: SvgPicture.asset(
-                      icon,
-                      colorFilter: ColorFilter.mode(
-                        Colors.white.withValues(alpha: opacity),
-                        BlendMode.srcIn,
+                  child: Transform.translate(
+                    offset: const Offset(-17, -27),
+                    child: Transform.scale(
+                      scale: 5.2,
+                      child: SvgPicture.asset(
+                        icon,
+                        colorFilter: ColorFilter.mode(
+                          Colors.white.withValues(alpha: opacity),
+                          BlendMode.srcIn,
+                        ),
                       ),
                     ),
                   ),
@@ -136,8 +138,8 @@ class HomeButtonView extends StatelessWidget {
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: Transform(
-                    transform: Matrix4.identity()..translate(0.0, 2),
+                  child: Transform.translate(
+                    offset: const Offset(0, 2),
                     child: SvgPicture.asset(AppAssets.icButtonShape),
                   ),
                 ),

@@ -123,8 +123,8 @@ class CommonDifficultyButtonView extends StatelessWidget {
                 selectedDifficulty == difficultyType
                     ? Align(
                         alignment: Alignment.bottomCenter,
-                        child: Transform(
-                          transform: Matrix4.identity()..translate(0.0, 4),
+                        child: Transform.translate(
+                          offset: const Offset(0, 4),
                           child: SvgPicture.asset(AppAssets.icButtonShape),
                         ),
                       )
