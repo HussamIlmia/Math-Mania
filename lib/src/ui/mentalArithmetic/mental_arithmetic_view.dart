@@ -13,8 +13,8 @@ import '/src/ui/mentalArithmetic/mental_arithmetic_question_view.dart';
 import '/src/ui/mentalArithmetic/mental_arithmetic_provider.dart';
 import '/src/core/app_constant.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
-import 'package:vsync_provider/vsync_provider.dart';
+import '/src/utility/tuple.dart';
+import '/src/ui/common/vsync_provider.dart';
 
 class MentalArithmeticView extends StatelessWidget {
   final Tuple2<Color, Color> colorTuple;
@@ -35,8 +35,8 @@ class MentalArithmeticView extends StatelessWidget {
                   difficultyType: context.read<ThemeProvider>().difficultyType,
                 ))
       ],
-      child: WillPopScope(
-        onWillPop: () => Future.value(false),
+      child: PopScope(
+        canPop: false,
         child: Scaffold(
           appBar:
               CommonAppBar<MentalArithmeticProvider>(colorTuple: colorTuple),

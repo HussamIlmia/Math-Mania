@@ -16,7 +16,7 @@ import '/src/ui/quickCalculation/quick_calculation_view.dart';
 import '/src/ui/splash/splash_view.dart';
 import '/src/ui/squareRoot/square_root_view.dart';
 import '/src/ui/guessTheSign/guess_sign_view.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
 var appRoutes = {
   KeyUtil.dashboard: (context) => DashboardView(),

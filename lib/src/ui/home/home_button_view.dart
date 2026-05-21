@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import '/src/core/app_assets.dart';
 import '/src/core/color_scheme.dart';
 import '/src/ui/common/common_tab_animation_view.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
 class HomeButtonView extends StatelessWidget {
   final Function onTab;
@@ -56,7 +56,7 @@ class HomeButtonView extends StatelessWidget {
                       child: SvgPicture.asset(
                         icon,
                         colorFilter: ColorFilter.mode(
-                          Colors.white.withOpacity(opacity),
+                          Colors.white.withValues(alpha: opacity),
                           BlendMode.srcIn,
                         ),
                       ),

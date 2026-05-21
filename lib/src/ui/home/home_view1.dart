@@ -2,24 +2,42 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import '/src/core/app_constant.dart';
 import '/src/core/color_scheme.dart';
 import '/src/data/models/dashboard.dart';
 import '/src/ui/dashboard/dashboard_provider.dart';
 import '/src/ui/home/home_button_view.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
-class HomeView1 extends HookWidget {
+class HomeView1 extends StatefulWidget {
   final Tuple2<Dashboard, double> tuple2;
 
-  const HomeView1({Key? key, required this.tuple2}) : super(key: key);
+  const HomeView1({super.key, required this.tuple2});
+
+  @override
+  State<HomeView1> createState() => _HomeView1State();
+}
+
+class _HomeView1State extends State<HomeView1> {
+  late final ScrollController _scrollController;
+  bool _isGamePageOpen = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    late bool isGamePageOpen;
-    ScrollController scrollController = useScrollController();
+    final tuple2 = widget.tuple2;
 
     return Scaffold(
       appBar: PreferredSize(
@@ -34,7 +52,7 @@ class HomeView1 extends HookWidget {
           child: Stack(
             children: [
               ListView(
-                controller: scrollController,
+                controller: _scrollController,
                 physics: AlwaysScrollableScrollPhysics(),
                 padding: EdgeInsets.only(
                   top: 183,
@@ -51,14 +69,20 @@ class HomeView1 extends HookWidget {
                         colorTuple: tuple2.item1.colorTuple,
                         opacity: tuple2.item1.opacity,
                         onTab: () {
-                          if (!isGamePageOpen) {
-                            isGamePageOpen = true;
+                          if (!_isGamePageOpen) {
+                            _isGamePageOpen = true;
                             Navigator.pushNamed(
                               context,
                               e.routePath,
                               arguments: tuple2.item1.colorTuple,
                             ).then((value) {
-                              isGamePageOpen = false;
+                              if (mounted) {
+                                setState(() {
+                                  _isGamePageOpen = false;
+                                });
+                              } else {
+                                _isGamePageOpen = false;
+                              }
                             });
                           }
                         }))
@@ -69,7 +93,7 @@ class HomeView1 extends HookWidget {
                 child: RepaintBoundary(
                   child: Animate(
                       adapter: ScrollAdapter(
-                    scrollController,
+                    _scrollController,
                     // begin: tuple2.item2,
                     end: 127,
                   )).custom(

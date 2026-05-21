@@ -13,9 +13,9 @@ import '/src/ui/common/common_difficulty_view.dart';
 import '/src/ui/common/math_riddle_view.dart';
 import '/src/ui/dashboard/dashboard_button_view.dart';
 import '/src/ui/dashboard/dashboard_provider.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
 class DashboardView extends StatefulWidget {
   @override

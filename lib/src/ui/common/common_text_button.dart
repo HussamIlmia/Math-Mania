@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '/src/ui/common/common_tab_animation_view.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
 class CommonTextButton extends StatelessWidget {
   final String text;

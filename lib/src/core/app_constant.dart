@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '/src/data/models/dashboard.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 import 'app_assets.dart';
 
 enum GameCategoryType {

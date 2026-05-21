@@ -10,8 +10,8 @@ import '/src/ui/correctAnswer/correct_answer_question_view.dart';
 import '/src/ui/correctAnswer/correct_answer_provider.dart';
 import '/src/core/app_constant.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
-import 'package:vsync_provider/vsync_provider.dart';
+import '/src/utility/tuple.dart';
+import '/src/ui/common/vsync_provider.dart';
 import '../common/common_neumorphic_view.dart';
 
 class CorrectAnswerView extends StatelessWidget {
@@ -33,8 +33,8 @@ class CorrectAnswerView extends StatelessWidget {
                   difficultyType: context.read<ThemeProvider>().difficultyType,
                 ))
       ],
-      child: WillPopScope(
-        onWillPop: () => Future.value(false),
+      child: PopScope(
+        canPop: false,
         child: Scaffold(
           appBar: CommonAppBar<CorrectAnswerProvider>(colorTuple: colorTuple),
           body: SafeArea(

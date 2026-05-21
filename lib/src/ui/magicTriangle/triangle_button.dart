@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '/src/data/models/magic_triangle.dart';
 import '/src/ui/magicTriangle/magic_triangle_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
 class TriangleButton extends StatelessWidget {
   final MagicTriangleGrid digit;

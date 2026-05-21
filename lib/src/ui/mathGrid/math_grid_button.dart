@@ -3,7 +3,7 @@ import '/src/core/color_scheme.dart';
 import '/src/data/models/math_grid.dart';
 import 'package:provider/provider.dart';
 import '/src/ui/mathGrid/math_grid_provider.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
 class MathGridButton extends StatelessWidget {
   final MathGridCellModel gridModel;

@@ -10,8 +10,8 @@ import '/src/ui/common/common_number_button.dart';
 import '/src/ui/common/dialog_listener.dart';
 import '/src/ui/squareRoot/square_root_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
-import 'package:vsync_provider/vsync_provider.dart';
+import '/src/utility/tuple.dart';
+import '/src/ui/common/vsync_provider.dart';
 
 class SquareRootView extends StatelessWidget {
   final Tuple2<Color, Color> colorTuple;
@@ -32,8 +32,8 @@ class SquareRootView extends StatelessWidget {
                   difficultyType: context.read<ThemeProvider>().difficultyType,
                 ))
       ],
-      child: WillPopScope(
-        onWillPop: () => Future.value(false),
+      child: PopScope(
+        canPop: false,
         child: Scaffold(
           appBar: CommonAppBar<SquareRootProvider>(colorTuple: colorTuple),
           body: SafeArea(

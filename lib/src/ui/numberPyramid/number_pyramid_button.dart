@@ -3,7 +3,7 @@ import '/src/core/color_scheme.dart';
 import '/src/data/models/number_pyramid.dart';
 import '/src/ui/numberPyramid/number_pyramid_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
 class PyramidNumberButton extends StatelessWidget {
   final NumPyramidCellModel numPyramidCellModel;

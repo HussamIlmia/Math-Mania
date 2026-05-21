@@ -9,8 +9,8 @@ import '/src/ui/numberPyramid/number_pyramid_provider.dart';
 import '/src/core/app_constant.dart';
 import '/src/ui/common/common_text_button.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
-import 'package:vsync_provider/vsync_provider.dart';
+import '/src/utility/tuple.dart';
+import '/src/ui/common/vsync_provider.dart';
 
 import 'number_pyramid_button.dart';
 
@@ -33,8 +33,8 @@ class NumberPyramidView extends StatelessWidget {
                   difficultyType: context.read<ThemeProvider>().difficultyType,
                 ))
       ],
-      child: WillPopScope(
-        onWillPop: () => Future.value(false),
+      child: PopScope(
+        canPop: false,
         child: Scaffold(
             appBar: CommonAppBar<NumberPyramidProvider>(colorTuple: colorTuple),
             body: SafeArea(

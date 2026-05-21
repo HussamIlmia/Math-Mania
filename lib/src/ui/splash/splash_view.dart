@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/src/core/app_constant.dart';
 import '/src/ui/splash/animated_grid_item_view.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
@@ -94,7 +94,7 @@ class GridItemView extends StatelessWidget {
                             ? Text(
                                 e,
                                 style: TextStyle(
-                                  color: Colors.white24.withOpacity(0.25),
+                                  color: Colors.white24.withValues(alpha: 0.25),
                                   fontFamily: "Poppins",
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
@@ -140,7 +140,7 @@ class GridItemView extends StatelessWidget {
                           child: Text(
                             e.item1,
                             style: TextStyle(
-                              color: Colors.white24.withOpacity(0.5),
+                              color: Colors.white24.withValues(alpha: 0.5),
                               fontFamily: "Poppins",
                               fontSize: 16,
                               fontWeight: FontWeight.w400,

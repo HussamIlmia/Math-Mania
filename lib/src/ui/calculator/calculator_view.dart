@@ -11,8 +11,8 @@ import '/src/ui/common/common_info_text_view.dart';
 import '/src/ui/common/common_wrong_answer_animation_view.dart';
 import '/src/ui/common/dialog_listener.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
-import 'package:vsync_provider/vsync_provider.dart';
+import '/src/utility/tuple.dart';
+import '/src/ui/common/vsync_provider.dart';
 
 class CalculatorView extends StatelessWidget {
   final Tuple2<Color, Color> colorTuple;
@@ -33,9 +33,8 @@ class CalculatorView extends StatelessWidget {
                   difficultyType: context.read<ThemeProvider>().difficultyType,
                 ))
       ],
-      // ignore: deprecated_member_use
-      child: WillPopScope(
-        onWillPop: () => Future.value(false),
+      child: PopScope(
+        canPop: false,
         child: Scaffold(
           appBar: CommonAppBar<CalculatorProvider>(colorTuple: colorTuple),
           body: SafeArea(

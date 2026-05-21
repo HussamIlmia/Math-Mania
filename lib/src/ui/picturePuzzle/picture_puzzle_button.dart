@@ -3,7 +3,7 @@ import '/src/data/models/picture_puzzle.dart';
 import '/src/ui/picturePuzzle/circle_shape.dart';
 import '/src/ui/picturePuzzle/picture_puzzle_answer_button.dart';
 import '/src/ui/picturePuzzle/square_shape.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 import 'triangle_shape.dart';
 
 class PicturePuzzleButton extends StatelessWidget {

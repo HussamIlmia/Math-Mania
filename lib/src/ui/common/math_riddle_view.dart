@@ -6,11 +6,9 @@ class MathRiddleView extends StatelessWidget {
   const MathRiddleView({Key? key}) : super(key: key);
 
   Future<void> _launchURL() async {
-    const url = 'https://pabitrabanerjee.me/Math-Mania-History';
-    // ignore: deprecated_member_use
-    if (await canLaunch(url)) {
-      // ignore: deprecated_member_use
-      await launch(url);
+    final url = Uri.parse('https://pabitrabanerjee.me/Math-Mania-History');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
     } else {
       throw 'Could not launch $url';
     }

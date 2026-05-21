@@ -2,7 +2,7 @@ import 'dart:math';
 
 import '/src/data/models/number_pyramid.dart';
 import '/src/utility/math_util.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
 class NumberPyramidRepository {
   static List<NumPyramidCellModel> singlePyramidList = <NumPyramidCellModel>[];

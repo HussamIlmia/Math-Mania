@@ -3,7 +3,7 @@ import '/src/core/color_scheme.dart';
 import '/src/data/models/math_pairs.dart';
 import '/src/ui/mathPairs/math_pairs_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
 class MathPairsButton extends StatelessWidget {
   final Pair mathPairs;

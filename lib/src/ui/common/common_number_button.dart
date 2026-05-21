@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '/src/ui/common/common_tab_animation_view.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
 class CommonNumberButton extends StatelessWidget {
   final Function onTab;
@@ -54,7 +54,7 @@ class CommonNumberButton extends StatelessWidget {
                             style:
                                 Theme.of(context).textTheme.titleMedium!.copyWith(
                                       fontSize: 18,
-                                      color: Colors.white.withOpacity(0.05),
+                                      color: Colors.white.withValues(alpha: 0.05),
                                       fontWeight: FontWeight.bold,
                                     ),
                           ),

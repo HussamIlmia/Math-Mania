@@ -12,8 +12,8 @@ import '/src/ui/magicTriangle/triangle_input_3x3.dart';
 import '/src/ui/magicTriangle/triangle_input_4x4.dart';
 import '/src/ui/magicTriangle/triangle_painter.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
-import 'package:vsync_provider/vsync_provider.dart';
+import '/src/utility/tuple.dart';
+import '/src/ui/common/vsync_provider.dart';
 
 class MagicTriangleView extends StatelessWidget {
   final double padding = 0;
@@ -36,8 +36,8 @@ class MagicTriangleView extends StatelessWidget {
                   difficultyType: context.read<ThemeProvider>().difficultyType,
                 ))
       ],
-      child: WillPopScope(
-        onWillPop: () => Future.value(false),
+      child: PopScope(
+        canPop: false,
         child: Scaffold(
           appBar: CommonAppBar<MagicTriangleProvider>(colorTuple: colorTuple),
           body: SafeArea(

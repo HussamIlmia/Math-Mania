@@ -7,8 +7,8 @@ import '/src/ui/mathGrid/math_grid_provider.dart';
 import '/src/core/app_constant.dart';
 import '/src/ui/mathGrid/math_grid_button.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
-import 'package:vsync_provider/vsync_provider.dart';
+import '/src/utility/tuple.dart';
+import '/src/ui/common/vsync_provider.dart';
 
 class MathGridView extends StatelessWidget {
   final Tuple2<Color, Color> colorTuple;
@@ -29,8 +29,8 @@ class MathGridView extends StatelessWidget {
                   difficultyType: context.read<ThemeProvider>().difficultyType,
                 ))
       ],
-      child: WillPopScope(
-        onWillPop: () => Future.value(false),
+      child: PopScope(
+        canPop: false,
         child: Scaffold(
           appBar: CommonAppBar<MathGridProvider>(colorTuple: colorTuple),
           body: SafeArea(

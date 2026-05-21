@@ -5,7 +5,7 @@ import '/src/ui/common/common_neumorphic_view.dart';
 import '/src/ui/common/common_wrong_answer_animation_view.dart';
 import '/src/ui/picturePuzzle/picture_puzzle_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
 class PicturePuzzleAnswerButton extends StatelessWidget {
   final PicturePuzzleShape picturePuzzleShape;

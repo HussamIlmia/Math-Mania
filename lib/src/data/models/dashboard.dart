@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import '/src/core/app_constant.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
 class Dashboard {
   final String title;

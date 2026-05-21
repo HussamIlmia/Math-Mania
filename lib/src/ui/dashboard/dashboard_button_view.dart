@@ -54,7 +54,7 @@ class DashboardButtonView extends StatelessWidget {
                         child: SvgPicture.asset(
                           dashboard.icon,
                           colorFilter: ColorFilter.mode(
-                            Colors.white.withOpacity(dashboard.opacity),
+                            Colors.white.withValues(alpha: dashboard.opacity),
                             BlendMode.srcIn,
                           ),
                         ),

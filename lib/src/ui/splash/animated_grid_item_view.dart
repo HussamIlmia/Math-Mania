@@ -73,13 +73,13 @@ class _AnimatedGridItemViewState extends State<AnimatedGridItemView>
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha: 0.05),
                 border: Border.all(color: Colors.white24, width: 1),
               ),
               child: Text(
                 randomNumber[0],
                 style: TextStyle(
-                  color: Colors.white24.withOpacity(0.25),
+                  color: Colors.white24.withValues(alpha: 0.25),
                   fontFamily: "Poppins",
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -98,13 +98,13 @@ class _AnimatedGridItemViewState extends State<AnimatedGridItemView>
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha: 0.05),
                 border: Border.all(color: Colors.white24, width: 1),
               ),
               child: Text(
                 randomNumber[1],
                 style: TextStyle(
-                  color: Colors.white24.withOpacity(0.25),
+                  color: Colors.white24.withValues(alpha: 0.25),
                   fontFamily: "Poppins",
                   fontSize: 16,
                   fontWeight: FontWeight.w400,

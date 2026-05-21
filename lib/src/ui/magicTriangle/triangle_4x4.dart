@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '/src/ui/magicTriangle/magic_triangle_provider.dart';
 import '/src/ui/magicTriangle/triangle_input_button.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
 class Triangle4x4 extends StatelessWidget {
   final double radius;

@@ -6,7 +6,7 @@ import '/src/data/models/dashboard.dart';
 import '/src/ui/dashboard/dashboard_provider.dart';
 import '/src/ui/home/home_button_view.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 
 class HomeView extends StatefulWidget {
   final Tuple2<Dashboard, double> tuple2;
@@ -186,7 +186,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                 height: 200,
                                 width: 200,
                                 colorFilter: ColorFilter.mode(
-                                  widget.tuple2.item1.fillIconColor.withOpacity(
+                                  widget.tuple2.item1.fillIconColor.withValues(
+                                      alpha:
                                       Theme.of(context).brightness ==
                                               Brightness.light
                                           ? 0.08
@@ -204,7 +205,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                 width: 175,
                                 colorFilter: ColorFilter.mode(
                                   widget.tuple2.item1.outlineIconColor
-                                      .withOpacity(
+                                      .withValues(
+                                          alpha:
                                           Theme.of(context).brightness ==
                                                   Brightness.light
                                               ? 0.16

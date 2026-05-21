@@ -6,7 +6,7 @@ import '/src/core/color_scheme.dart';
 import '/src/ui/common/common_score_view.dart';
 import '/src/ui/app/game_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
+import '/src/utility/tuple.dart';
 import 'common_linear_percent_indicator3.dart';
 
 class CommonAppBar<T extends GameProvider> extends StatelessWidget

@@ -11,8 +11,8 @@ import '/src/core/app_constant.dart';
 import '/src/ui/picturePuzzle/picture_puzzle_button.dart';
 import '/src/ui/common/common_text_button.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
-import 'package:vsync_provider/vsync_provider.dart';
+import '/src/utility/tuple.dart';
+import '/src/ui/common/vsync_provider.dart';
 // import 'package:collection/collection.dart';
 
 class PicturePuzzleView extends StatelessWidget {
@@ -34,9 +34,8 @@ class PicturePuzzleView extends StatelessWidget {
                   difficultyType: context.read<ThemeProvider>().difficultyType,
                 ))
       ],
-      // ignore: deprecated_member_use
-      child: WillPopScope(
-        onWillPop: () => Future.value(false),
+      child: PopScope(
+        canPop: false,
         child: Scaffold(
           appBar: CommonAppBar<PicturePuzzleProvider>(colorTuple: colorTuple),
           body: SafeArea(
