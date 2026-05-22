@@ -5,6 +5,22 @@ allprojects {
     }
 }
 
+subprojects { subproject ->
+    // FlutterFire Analytics defers to AGP 9 built-in Kotlin, while this Flutter
+    // Gradle plugin still needs AGP's legacy DSL. Compile its Kotlin sources
+    // through the classic Kotlin Gradle plugin until the ecosystem fully moves.
+    if (subproject.name == "firebase_analytics") {
+        subproject.pluginManager.withPlugin("com.android.library") {
+            subproject.apply plugin: "org.jetbrains.kotlin.android"
+        }
+        subproject.pluginManager.withPlugin("org.jetbrains.kotlin.android") {
+            subproject.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+                kotlinOptions.jvmTarget = "17"
+            }
+        }
+    }
+}
+
 def newBuildDir = rootProject.layout.buildDirectory.dir("../../build").get()
 rootProject.layout.buildDirectory.value(newBuildDir)
 

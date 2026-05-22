@@ -44,6 +44,12 @@ dev_dependencies:
 
   flutter_launcher_icons: ^0.14.4
   flutter_lints: ^6.0.0
+  sqflite_common_ffi: ^2.3.3
+
+hooks:
+  user_defines:
+    sqlite3:
+      source: system
 
 flutter_launcher_icons:
   android: true
